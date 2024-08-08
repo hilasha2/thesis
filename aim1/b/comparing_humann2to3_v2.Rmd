@@ -1,0 +1,397 @@
+---
+title: "comparing_humann2to3"
+output: html_document
+---
+
+```{r setup}
+#knitr::opts_chunk$set(echo = FALSE)
+list.of.packages <- c("tidyverse", "plotly", "ggrepel", "grid")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+lapply(list.of.packages, require, character.only = TRUE)
+```
+
+
+```{r paths}
+# By special I mean: UNMAPPED, UNGROUPED, UNINTEGRATED.
+BASE_FOLDER <- '/pita/users/hila/biobakery_workflows/output_data'
+PATH_HUMANN2 <- '22_Aug_2021_HMP2_metagenome_samples_biobakery2/humann'
+#PATH_HUMANN3 <- '21_Dec_2021_HMP2_samples_uniref50/humann'
+PATH_HUMANN3 <- '16_Aug_2021_HMP2_metagenome_samples/humann'
+SAMPLE_NAME <- 'CSM5MCV1_P' #CSM7KOK1
+INCLUDES.UNMAPPED <- c('with_special', 'no_special')
+STRATIFICATION <- c('stratified', 'unstratified')
+pathabundance.path <- 'relab/pathways/####_pathabundance_relab_QQQQ_WWWW.tsv'
+genefamiles.path <- 'relab/genes/####_genefamilies_relab_QQQQ_WWWW.tsv'
+pathcoverage.path <- 'pathcoverage/####_pathcoverage_WWWW.tsv'
+```
+
+
+
+```{r}
+getting_paths <- function(path) {
+  path.list <- c()
+  new.path <- gsub('####', SAMPLE_NAME, path)
+  if(str_detect(new.path, 'QQQQ')) {
+    for(name in INCLUDES.UNMAPPED) {
+       path.list <- path.list %>% append(gsub('QQQQ', name, new.path))
+    }
+  } else {
+    path.list <- path.list %>% append(new.path)
+  }
+  path.list2 <- c()
+  if(any(str_detect(path.list, 'WWWW'))) {
+      for(path in path.list) {
+      if(str_detect(path, 'WWWW')) {
+        for(stratification.status in STRATIFICATION) {
+          path.list2 <- path.list2 %>% append(gsub('WWWW', stratification.status, path))
+        }
+      }
+    }
+    path.list <- path.list2
+  }
+  
+  return(path.list)
+} 
+pa.paths2 <- file.path(BASE_FOLDER, PATH_HUMANN2, getting_paths(pathabundance.path)) 
+pa.paths3 <- file.path(BASE_FOLDER, PATH_HUMANN3, getting_paths(pathabundance.path)) 
+gf.paths2 <- file.path(BASE_FOLDER, PATH_HUMANN2, getting_paths(genefamiles.path))
+gf.paths3 <- file.path(BASE_FOLDER, PATH_HUMANN3, getting_paths(genefamiles.path))
+pc.paths2 <- file.path(BASE_FOLDER, PATH_HUMANN2, getting_paths(pathcoverage.path))
+pc.paths3 <- file.path(BASE_FOLDER, PATH_HUMANN3, getting_paths(pathcoverage.path))
+```
+
+
+```{r}
+pa.paths3
+```
+
+```{r reading files}
+# pa - pathabundance; gf - gene families; pc - pathcoverage.
+# ws - with special; ns - no special.
+# st - stratified; us - unstratified.
+pa.ws.st.df2 <- read.delim(pa.paths2[1], stringsAsFactors = F, check.names = T)
+pa.ws.us.df2 <-  read.delim(pa.paths2[2], stringsAsFactors = F, check.names = T)
+pa.ns.st.df2 <- read.delim(pa.paths2[3], stringsAsFactors = F, check.names = T)
+pa.ns.us.df2 <-  read.delim(pa.paths2[4], stringsAsFactors = F, check.names = T)
+
+gf.ws.st.df2 <- read.delim(gf.paths2[1], stringsAsFactors = F, check.names = T)
+gf.ws.us.df2 <-  read.delim(gf.paths2[2], stringsAsFactors = F, check.names = T)
+gf.ns.st.df2 <- read.delim(gf.paths2[3], stringsAsFactors = F, check.names = T)
+gf.ns.us.df2 <-  read.delim(gf.paths2[4], stringsAsFactors = F, check.names = T)
+
+pc.st.df2 <-  read.delim(pc.paths2[1], stringsAsFactors = F, check.names = T)
+pc.us.df2 <-  read.delim(pc.paths2[2], stringsAsFactors = F, check.names = T)
+
+# humann3: 
+pa.ws.st.df3 <- read.delim(pa.paths3[1], stringsAsFactors = F, check.names = T)
+pa.ws.us.df3 <-  read.delim(pa.paths3[2], stringsAsFactors = F, check.names = T)
+pa.ns.st.df3 <- read.delim(pa.paths3[3], stringsAsFactors = F, check.names = T)
+pa.ns.us.df3 <-  read.delim(pa.paths3[4], stringsAsFactors = F, check.names = T)
+
+gf.ws.st.df3 <- read.delim(gf.paths3[1], stringsAsFactors = F, check.names = T)
+gf.ws.us.df3 <-  read.delim(gf.paths3[2], stringsAsFactors = F, check.names = T)
+gf.ns.st.df3 <- read.delim(gf.paths3[3], stringsAsFactors = F, check.names = T)
+gf.ns.us.df3 <-  read.delim(gf.paths3[4], stringsAsFactors = F, check.names = T)
+
+pc.st.df3 <-  read.delim(pc.paths3[1], stringsAsFactors = F, check.names = T)
+pc.us.df3 <-  read.delim(pc.paths3[2], stringsAsFactors = F, check.names = T)
+```
+
+
+```{r merging paired humann2 and hummann3 tables}
+merge_tables <- function(df.humann2, df.humann3) {
+  # merging the tables
+  merged.table <- merge(x = df.humann2, 
+      y = df.humann3, 
+      by = colnames(df.humann2)[1], # features column
+      all = T, 
+      suffixes = c('.humann2', '.humann3'))
+  # assigning 0 to any relative abundance with NA.
+  merged.table <- merged.table %>% mutate_all(~replace(., is.na(.), 0))
+  return(merged.table)
+}
+
+pa.ws.st.merged <- merge_tables(pa.ws.st.df2, pa.ws.st.df3)
+pa.ws.us.merged <- merge_tables(pa.ws.us.df2, pa.ws.us.df3)
+pa.ns.st.merged <- merge_tables(pa.ns.st.df2, pa.ns.st.df3)
+pa.ns.us.merged <- merge_tables(pa.ns.us.df2, pa.ns.us.df3)
+
+gf.ws.st.merged <- merge_tables(gf.ws.st.df2, gf.ws.st.df3)
+gf.ws.us.merged <- merge_tables(gf.ws.us.df2, gf.ws.us.df3)
+gf.ns.st.merged <- merge_tables(gf.ns.st.df2, gf.ns.st.df3)
+gf.ns.us.merged <- merge_tables(gf.ns.us.df2, gf.ns.us.df3)
+
+pc.st.merged <- merge_tables(pc.st.df2, pc.st.df3)
+pc.us.merged <- merge_tables(pc.us.df2, pc.us.df3)
+```
+
+```{r mutuals function}
+# Returns a df with rows of species found both by 
+# HUMAnN2 and HUMAnN3 (i.e. redu)
+mutual_species_df <- function(df) {
+   mutual_species_df <- filter(df,
+                               !(.data[[names(df)[2]]] == 0 | 
+                                   .data[[names(df)[3]]] == 0))
+}
+```
+
+```{r selecting mutual species}
+pa.ws.st.mutuals <- mutual_species_df(pa.ws.st.merged)
+pa.ws.us.mutuals <- mutual_species_df(pa.ws.us.merged)
+pa.ns.st.mutuals <- mutual_species_df(pa.ns.st.merged)
+pa.ns.us.mutuals <- mutual_species_df(pa.ns.us.merged)
+
+gf.ws.st.mutuals <- mutual_species_df(gf.ws.st.merged)
+gf.ws.us.mutuals <- mutual_species_df(gf.ws.us.merged)
+gf.ns.st.mutuals <- mutual_species_df(gf.ns.st.merged)
+gf.ns.us.mutuals <- mutual_species_df(gf.ns.us.merged)
+
+```
+
+```{r label_function}
+# label_function <- function(zero_lbl, special_lbl) {
+#   if(!is.na(zero_lbl) & !is.na(special_lbl)) {
+#     return(special_lbl)
+#   }
+#   else if(!is.na(zero_lbl) & is.na(special_lbl)) {
+#     return(zero_lbl) 
+#   }
+#   else if(is.na(zero_lbl) & !is.na(special_lbl)) {
+#     return(special_lbl)
+#   } else {
+#     return('Na')
+#   }
+# }
+```
+
+
+```{r scatter plot}
+
+correlation_test <- function(df) {
+  # Calculation of correlation coefficient
+  chosen_method = ""
+  # Is the data normally distributed?
+  
+  # Sample size in Shapiro test must be between 3 and 5000
+  if(dim(df)[1] <= 5000) {
+    # Changing the columns to have NA back, shapiro.test ignores NA. 
+    humann2.abund <- df[[2]] #%>% replace(., . == 0, NA)
+    humann3.abund <- df[[3]] #%>% replace(., . == 0, NA)
+    p.value2 <- shapiro.test(humann2.abund)$p.value
+    p.value3 <- shapiro.test(humann3.abund)$p.value
+    if(p.value2 > 0.05 & p.value3 > 0.05) {
+      chosen_method = "pearson"
+      } else {
+        chosen_method = "spearman"
+    }
+  } else {
+    chosen_method = "spearman"
+  }
+  
+  cor.result = cor.test(df[[2]], df[[3]], 
+                      method = chosen_method,
+                      na.action=na.omit,
+                      exact = FALSE)
+  # if the p-value is smaller than 2e-16 then it results in 0, but that's the wrong output.
+  if (cor.result$p.value != 0) {
+    str <- sprintf("r = %.3f\np = %g\n%s", cor.result$estimate, 
+                 cor.result$p.value, chosen_method)
+  } else {
+    str <- sprintf("r = %.3f\np < 2e-16\n%s", cor.result$estimate, 
+                   chosen_method)
+  }
+  
+  print(str)
+  return(str)
+}
+
+
+
+scatter_h2_vs_h3 <- function(df, ttl, is.special, 
+                             is.path.coverage, 
+                             label.points.on.axes, 
+                             corr.annotation.location = "") {
+  if(!is.path.coverage) {
+    corr.str <- correlation_test(df)
+    if(is.special) {
+      sub.ttl <- paste("Sample ID:", SAMPLE_NAME)
+    } else {
+      sub.ttl <- paste("Sample ID:", SAMPLE_NAME, 
+                       "\n(excludes: UNMAPPED/UNGROUPED/UNINTEGRATED)")
+    }
+    corr.label = textGrob(label = corr.str, x = 0.1, y =0.95,
+                          just = c("left", "top"),
+                          gp=gpar(size = 12))
+  } else {
+    sub.ttl <- paste("Sample ID:", SAMPLE_NAME)
+  }
+  
+  p <- ggplot(df, aes(x = .data[[names(df[2])]],
+                         y = .data[[names(df[3])]])) +   
+  geom_smooth(color = "steelblue3", method = lm, formula = y ~ x) +
+  geom_abline(aes(intercept=0, slope=1), color = 'grey45') +
+  geom_point(color = "steelblue4", alpha = 0.5, size = 3) +
+  labs(x = "HUMAnN2", y = "HUMAnN3", 
+       title = ttl, 
+       subtitle = sub.ttl) +
+  theme(text = element_text(size = 12),
+        plot.title = element_text(hjust = 0.5, size = 16),
+        plot.subtitle = element_text(hjust = 0.5, size = 14)) 
+  if(!is.path.coverage) {
+    
+    if(corr.annotation.location == "top_left") {
+      p <- p + annotation_custom(corr.label)
+    } else if(corr.annotation.location == "bottom_right") {
+      #grob <- grobTree(textGrob(label = corr.label, x = 0.8, y = 0.3))
+      p <- p + annotation_custom(corr.label, xmin = 0.08, ymax = 0.007)
+    }
+  }
+  
+  # Adding labels 
+  if(!is.path.coverage) {
+    # Adding labels with relative abundance 0 on either axis:
+    if(label.points.on.axes) {
+      zero_lbls <- ifelse(df[[2]] == 0 | df[[3]] == 0, df[[1]], '')
+    }
+    # Adding label with special feature entries:
+    draw.special.lbls = F
+    if(is.special) {
+      special.labels <- "UNMAPPED|UNINTEGRATED|UNGROUPED"
+      includes.special <- grepl(special.labels, df[[1]] ,ignore.case = T)
+      draw.special.lbls <- any(includes.special)
+      if(draw.special.lbls) {
+        # returns a characters list
+        special_lbls <- str_extract(df[[1]], special.labels) #%>% na.omit
+      }
+    } 
+    
+    if(label.points.on.axes & draw.special.lbls) {
+      lbls <- ifelse(!is.na(special_lbls), special_lbls, zero_lbls)
+    } else if(label.points.on.axes & !draw.special.lbls) {
+      lbls <- zero_lbls 
+    } else if(!label.points.on.axes & draw.special.lbls) {
+      lbls <- special_lbls
+    }
+    
+    if(label.points.on.axes | draw.special.lbls) {
+       p <- p + geom_label_repel(aes(label = lbls),
+                                 max.overlaps = 1)
+    }
+   
+  }
+
+  
+  return(p)
+}
+
+```
+
+
+
+```{r}
+# pa.ws.st.plot <- scatter_h2_vs_h3(pa.ws.st.merged, "Pathways Abundance Stratified", T, F, F, "top_left")
+# pa.ws.us.plot <- scatter_h2_vs_h3(pa.ws.us.merged, "Patwhays Abundance Unstratified", T, F, F, "top_left")
+# pa.ns.st.plot <- scatter_h2_vs_h3(pa.ns.st.merged, "Pathways Abundance Stratified", F, F, F, "top_left") 
+# pa.ns.us.plot <- scatter_h2_vs_h3(pa.ns.us.merged, "Patwhays Abundance Unstratified", F, F, F, "top_left") 
+# 
+# gf.ws.st.plot <- scatter_h2_vs_h3(gf.ws.st.merged, "Gene Families Abundance Stratified", T, F, F, "top_left")
+# gf.ws.us.plot <- scatter_h2_vs_h3(gf.ws.us.merged, "Gene Families Abundance Unstratified", T, F, F, "top_left")
+# gf.ns.st.plot <- scatter_h2_vs_h3(gf.ns.st.merged, "Gene Families Abundance Stratified", F, F, F, "top_left")
+# gf.ns.us.plot <- scatter_h2_vs_h3(gf.ns.us.merged, "Gene Families Abundance Unstratified", F, F, F, "bottom_right") 
+# 
+# pc.st.plot <- scatter_h2_vs_h3(pc.st.merged, "Path Coverage Stratified", T, T, F)
+# pc.us.plot <- scatter_h2_vs_h3(pc.st.merged, "Path Coverage Unstratified", T, T, F)
+
+# pa.ws.st.mut.plot <- scatter_h2_vs_h3(pa.ws.st.mutuals, "Pathways Abundance Stratified", T, F, F, "top_left")
+# pa.ws.us.mut.plot <- scatter_h2_vs_h3(pa.ws.us.mutuals, "Patwhays Abundance Unstratified", T, F, F, "top_left")
+# pa.ns.st.mut.plot <- scatter_h2_vs_h3(pa.ns.st.mutuals, "Pathways Abundance Stratified", F, F, F, "top_left") 
+# pa.ns.us.mut.plot <- scatter_h2_vs_h3(pa.ns.us.mutuals, "Patwhays Abundance Unstratified", F, F, F, "top_left") 
+
+gf.ws.st.mut.plot <- scatter_h2_vs_h3(gf.ws.st.mutuals, "Gene Families Abundance Stratified", T, F, F, "top_left")
+gf.ws.us.mut.plot <- scatter_h2_vs_h3(gf.ws.us.mutuals, "Gene Families Abundance Unstratified", T, F, F, "top_left")
+gf.ns.st.mut.plot <- scatter_h2_vs_h3(gf.ns.st.mutuals, "Gene Families Abundance Stratified", F, F, F, "top_left")
+gf.ns.us.mut.plot <- scatter_h2_vs_h3(gf.ns.us.mutuals, "Gene Families Abundance Unstratified", F, F, F, "top_left")
+
+
+```
+
+
+```{r}
+plot(gf.ns.us.mut.plot)
+```
+
+```{r}
+ggplotly(gf.ws.us.plot) 
+
+```
+
+```{r}
+OUTPUT_PATH <- '/pita/users/hila/analysis/plots'
+
+file_naming <- function(analysis.name, is.special, 
+                        is.stratified, is.pathcoverage) {
+  base.name <- 'humann2_vs_humann3'
+  if(is.stratified) {
+    stratified.name <- 'stratified'
+  } else {
+    stratified.name <- 'unstratified'
+  }
+  
+  if(!is.pathcoverage) {
+    if(is.special) {
+      special.name <- 'with_special'
+    } else {
+      special.name <- 'no_special'
+    }
+    name <- paste(base.name, analysis.name, special.name, stratified.name, SAMPLE_NAME, sep = '_')
+  } else {
+    name <- paste(base.name, analysis.name, stratified.name, SAMPLE_NAME, sep = '_')
+  } 
+  file.name <- paste(name, 'png', sep = '.')
+  return(file.name)
+}
+  
+WIDTH = 5.7
+HEIGHT = 4
+
+# ggsave(file_naming('pathways', T, T, F), pa.ws.st.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+# ggsave(file_naming('pathways', T, F, F), pa.ws.us.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+# ggsave(file_naming('pathways', F, T, F), pa.ns.st.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+# ggsave(file_naming('pathways', F, F, F), pa.ns.us.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+# 
+# ggsave(file_naming('genefamilies', T, T, F), gf.ws.st.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+# ggsave(file_naming('genefamilies', T, F, F), gf.ws.us.plot, device = 'png', path = OUTPUT_PATH, units = "in",width = WIDTH, height = HEIGHT)
+# ggsave(file_naming('genefamilies', F, T, F), gf.ns.st.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+# ggsave(file_naming('genefamilies', F, F, F), gf.ns.us.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+# 
+# ggsave(file_naming('pathcoverage', T, T, T), pc.st.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+# ggsave(file_naming('pathcoverage', T, F, T), pc.us.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+
+
+ggsave(file_naming('pathways_mutuals', T, T, F), pa.ws.st.mut.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+ggsave(file_naming('pathways_mutuals', T, F, F), pa.ws.us.mut.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+ggsave(file_naming('pathways_mutuals', F, T, F), pa.ns.st.mut.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+ggsave(file_naming('pathways_mutuals', F, F, F), pa.ns.us.mut.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+
+
+ggsave(file_naming('genefamilies_mutuals', T, T, F), gf.ws.st.mut.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+ggsave(file_naming('genefamilies_mutuals', T, F, F), gf.ws.us.mut.plot, device = 'png', path = OUTPUT_PATH, units = "in",width = WIDTH, height = HEIGHT)
+ggsave(file_naming('genefamilies_mutuals', F, T, F), gf.ns.st.mut.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+ggsave(file_naming('genefamilies_mutuals', F, F, F), gf.ns.us.mut.plot, device = 'png', path = OUTPUT_PATH, units = "in", width = WIDTH, height = HEIGHT)
+
+```
+
+
+```{r}
+cor.result = cor.test(pc.st.merged[[2]], pc.st.merged[[3]], 
+                      method = 'spearman',
+                      na.action=na.omit,
+                      exact = FALSE)
+cor.result
+```
+
+
+```{r}
+cor.result$p.value
+```
