@@ -1,9 +1,8 @@
-**Aim 3.b. – Analyzing and capturing disease signals in Sheba’s larger cohort.**
+# **Aim 3.b. – Analyzing and capturing disease signals in Sheba’s larger cohort.**
 
-Figure 21: Initial process of IIRN_plus dataset. 
+### Figure 21: Initial process of IIRN_plus dataset. 
 
-A) Sequencing depth curve for sample filtration
-process – number of species as a function of number of reads per sample.
+A) Sequencing depth curve for sample filtration process – number of species as a function of number of reads per sample.
 
 	script: figure_21/num_features_by_reads/features_as_function_of_reads_for_iirn.Rmd
 	metadata: IIRN_metadata_23_Feb_2023_added_pilot_and_biobakery_results.tsv
@@ -20,7 +19,7 @@ C) PCoA plot for testing batch effects of combining two studies: IIRN and SOURCE
 	metadata: IIRN_plus/metadata/IIRN_metadata_31_May_2023_samples_above_threshold_only.tsv
 	data: IIRN_plus/mgx/metaphlan/metaphlan_species_filtered_1abund_in_1perc_outof10k.tsv
 
-Figure 22:
+### Figure 22:
 
 A) Violin plots of pairwise Spearman correlations between the feature-microbial profiles either from the same subject (within) or other subjects (across).
 
@@ -38,7 +37,7 @@ B) PERMANOVA analysis for testing variation in Canberra distance matrices of mic
 	IIRN_plus/mgx/humann/pathbundance_filtered_1abund_in_1perc_outof10k.tsv
 	IIRN_plus/mgx/humann/ecs_filtered_1abund_in_1perc_outof10k_ecs2name.tsv
 	
-Figure 23: Box plots of top significant associations between IIRN+’s microbial feature abundance tables and their metadata (FDR < 0.25) as identified by MaAsLin2.
+### Figure 23: Box plots of top significant associations between IIRN+’s microbial feature abundance tables and their metadata (FDR < 0.25) as identified by MaAsLin2.
 
 	metadata: IIRN_metadata_17_May_2023.tsv
 	data:
@@ -56,7 +55,7 @@ Figure 23: Box plots of top significant associations between IIRN+’s microbial
 	~/maaslin2/code/R/Maaslin2.R --normalization=NONE --random_effects="patient_No" --fixed_effects="diagnosis,Age,Gender" --standardize=FALSE ~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/merged_with_pilot/ecs_filtered_1abund_in_1perc_outof10k_ecs2name.tsv ~/analysis/datasets/IIRN_metadata_17_May_2023.tsv ~/maaslin2/output/03_Apr_2023_iirn_source_pilot_ecs_ecs2name
 
 
-Figure 24: ROC curve for a random forest trees on a ECs relative abundance profile of IIRN+’s quiescent patients. 
+### Figure 24: ROC curve for a random forest trees on a ECs relative abundance profile of IIRN+’s quiescent patients. 
 
 	script: figure_24/iirn_analysis.ipynb
 	metadata: IIRN_metadata_17_May_2023.tsv
