@@ -1,4 +1,4 @@
-Aim 3.b. – Analyzing and capturing disease signals in Sheba’s larger cohort.
+**Aim 3.b. – Analyzing and capturing disease signals in Sheba’s larger cohort.**
 
 Figure 21: Initial process of IIRN_plus dataset. 
 
