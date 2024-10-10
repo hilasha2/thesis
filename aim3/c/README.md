@@ -1,6 +1,6 @@
-**Aim 3.c. - Identifying correlations between paired MGX and metabolomic (MBX) samples.**
+# **Aim 3.c. - Identifying correlations between paired MGX and metabolomic (MBX) samples.**
 
-figure 25: DA Heatmap of IIRN_plus’s aggregated KO relative abundance table between control and CD patients
+### Figure 25: DA Heatmap of IIRN_plus’s aggregated KO relative abundance table between control and CD patients
 
 	script: aim_4.ipynb (first section, & 'iirn + source pilot', & 'aggregate' sections)
 	metadata: ~/IIRN_plus/metadata/IIRN_metadata_31_May_2023_samples_above_threshold_only.tsv
@@ -8,7 +8,7 @@ figure 25: DA Heatmap of IIRN_plus’s aggregated KO relative abundance table be
 	extra data: ~/extra_data/kotable.txt
 	output data: aim4_IIRN_ko_relab_unstratified_first_samples_1e07of10k_in10perc_diff_CD_vs_ctl_in_lvl3.csv
 	
-Figure 26: HAllA heatmap of correlations of IIRN_plus’s MBX table vs. IIRN_plus’s MGX table
+### Figure 26: HAllA heatmap of correlations of IIRN_plus’s MBX table vs. IIRN_plus’s MGX table
 
 MGX table’s features included sum-aggregated KO features which were found significant in Fig. 25.
 
