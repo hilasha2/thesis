@@ -1,0 +1,655 @@
+---
+title: "iirn_permanova"
+output: html_document
+---
+
+```{r setup}
+library(ggplot2)
+library(tidyverse)
+```
+
+
+```{r basic strings}
+## WGCNA - Weighted correlation network analysis (WGCNA) can be used for finding clusters (modules) of highly correlated genes
+## organize data (code taken for WGCNA analysis)
+type = 'canberra'
+extra_vars = c('Age','Gender')
+strata_var = NA
+
+cohort = 'IIRN_SOURCE_pilot'
+location = 'MGX'
+date = '22_Aug_2023'
+feature_name = 'species'
+#feature_name = 'pathways'
+#feature_name = 'ecs'
+main_name = sprintf('%s_%s_%s_%s',date, cohort, location, feature_name)
+
+```
+
+
+
+```{r}
+out_path = sprintf('/pita/users/hila/permanova')
+out_path = sprintf('%s/%s/',out_path, main_name)
+dir.create(out_path)
+out_path
+```
+
+```{r}
+### input
+# set needed tables
+#metadata_file = sprintf('/pita/users/hila/analysis/datasets/IIRN_metadata_17_May_2023.tsv')
+metadata_file = '/pita/users/hila/analysis/datasets/IIRN_metadata_31_May_2023_samples_above_threshold_only.tsv'
+metadata_df = read.table(file = metadata_file, header = T,sep = '\t', 
+                         stringsAsFactors = F, na.strings = c('NA','na','Unkown','#N/A','Unk'),
+                         comment.char = '', quote="\"")
+metadata_df
+```
+
+```{r choosing abundance path by feature name}
+# choosing relative abundace table path
+if(feature_name == 'species') {
+  abundance_path = '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/metaphlan/merged_with_pilot/metaphlan_species_filtered_1abund_in_1perc_outof10k.tsv'
+} else if(feature_name == 'pathways') {
+  abundance_path = '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/merged_with_pilot/pathbundance_filtered_1abund_in_1perc_outof10k.tsv'
+} else if(feature_name == 'ecs') {
+  abundance_path = '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/merged_with_pilot/ecs_filtered_1abund_in_1perc_outof10k_ecs2name.tsv'
+}
+
+abundance_path
+```
+
+
+```{r}
+# reading abundance table
+# [features x samples]
+abundance_df = read.table(file = abundance_path, header = T,row.names = 1, comment.char = '', quote="\"", sep='\t')
+abundance_df %>% head()
+```
+
+
+
+```{r}
+# selecting only samples to include in the analysis
+samples_to_include <- metadata_df$include_in_analysis == T
+samples_in_data <- colnames(abundance_df) %in% metadata_df$SampleID[samples_to_include] #metadata_df$old_name_ontube[samples_to_include]
+  
+
+samples_in_data
+```
+
+```{r}
+abundance_filt <- abundance_df[,samples_in_data]
+abundance_filt <- abundance_filt[,order(colnames(abundance_filt))] # order samples alphbetically
+abundance_filt
+```
+
+```{r}
+metadata_filt <- metadata_df[samples_to_include,]
+metadata_filt <- metadata_filt[order(metadata_filt$SampleID),] # order samples alphabetically
+metadata_filt
+```
+
+```{r}
+# checking whether the samples are ordered the sample in the metadata and data
+all(colnames(abundance_filt) == metadata_filt$SampleID)
+```
+
+
+```{r}
+# checking whether we have any NA in our data table
+any(is.na(abundance_filt))
+```
+
+```{r}
+# transposing abundance table s.t. we get a [samples x features] table
+abundance_t_df = abundance_filt %>% t() %>% as.data.frame()
+abundance_t_df %>% head()
+```
+
+```{r}
+# calculating distance matrix of the abundance table
+dist_table = abundance_t_df %>% dist(abundance_df, method = 'canberra') # diag = F, upper = F
+```
+
+```{r}
+## set first sample - finding and indicating which samples is the first sample for each patient.
+metadata_filt$First_sample = NA
+for (i in 1:length(metadata_filt$SampleID))
+{
+  metadata_filt$First_sample[i] = metadata_filt$Stool_num[i] == min(metadata_filt$Stool_num[metadata_filt$pn_ID == metadata_filt$pn_ID[i]], na.rm = T)
+}
+metadata_filt$First_sample = ifelse(metadata_filt$First_sample, 'Y','N')
+metadata_filt[,c("SampleID", "First_sample")]
+```
+```{r}
+# how many first samples?
+metadata_filt %>% filter(First_sample == 'Y') # & diagnosis == 'CD') 
+
+```
+
+```{r}
+
+#names(metadata_filt)[names(metadata_filt) == 'Sample_ID'] <- 'Sample'
+#names(metadata_filt)[names(metadata_filt) == 'old_name_ontube'] <- 'SampleID'
+#names(metadata_filt)[names(metadata_filt) == 'patient_No'] <- 'pn_ID'
+#metadata_filt
+```
+
+```{r}
+# setting row names as SampleID
+rownames(metadata_filt) <- metadata_filt$SampleID
+rownames(metadata_filt)[0:20]
+```
+```{r}
+# Changing column name 
+#colnames(metadata_filt)[which(names(df) == "Dx_PGA")] <- "Disease_Activity"
+```
+
+```{r}
+# organize metadata
+map = metadata_filt #%>% select(c(old_name_ontube, Age, Gender, smoking, 
+                     #            diagnosis, Dx_PGA, alternative_medicine, 
+                     #            corticosteroids, TX, TX_combos_specifics, 
+                     #            CDAI, First_sample))
+
+#metadata_df$CRP_Absolute[metadata_df$Dx == 'Control'] = NA
+map$CRP_Category[map$diagnosis == 'Ctl'] = NA
+#metadata_df$FCP_Absolute[metadata_df$Dx == 'Control'] = NA
+map$Cal_Category[map$diagnosis == 'Ctl'] = NA
+#metadata_df$Total_LS[metadata_df$Dx == 'Control'] = NA
+#metadata_df$Highest_LS[metadata_df$Dx == 'Control'] = NA
+#metadata_df$Highest_LS_Category[metadata_df$Dx == 'Control'] = NA
+#metadata_df$FCP_Absolute = as.numeric(metadata_df$FCP_Absolute)
+#metadata_df$Highest_LS_Category = as.numeric(metadata_df$Highest_LS_Category)
+
+#map$CDAI[map$diagnosis == 'Ctl'] = NA
+#map$CDAI = as.numeric(map$CDAI)
+
+map$Disease_location_L[map$diagnosis == 'Ctl'] = NA
+map$Disease_location_B[map$diagnosis == 'Ctl'] = NA
+map$TX_immuno[map$diagnosis == 'Ctl'] = NA
+map$TX_bio[map$diagnosis == 'Ctl'] = NA
+map$TX_5ASA[map$diagnosis == 'Ctl'] = NA
+map$Disease_Activity[map$diagnosis == 'Ctl'] = NA
+map
+```
+
+
+```{r}
+## remove metadata columns with no data or no variance
+for (i in dim(map)[2]:1)
+{
+  if (sum(!is.na(map[,i])) <= 1 ) # | var(metadata_df[,i], na.rm = T) ==0 ) 
+  { print(sprintf('remove %s from metadata',names(map)[i]))
+    map = map[,-i] }
+}
+map
+```
+
+```{r}
+dist_all = as.matrix(dist_table) # [samples x samples]
+```
+
+```{r}
+vars_2_check = names(map) 
+vars_2_check = vars_2_check[! vars_2_check %in% c('First_sample', 'SampleID')]
+vars_2_check[0:10]
+```
+
+
+
+
+```{r permanova functions}
+set_dist_map_by_vars = function(dist, map, vars)
+{
+  temp = is.na(map[,vars])
+  # which samples do not have na
+  wanted_samples_id = row.names(map)[as.numeric(rowSums(temp)) == 0]
+ 
+  # wanted_samples_id = row.names(map)[ !is.na(map[[var]]) ]
+  # set fit for how R reads names
+  row.names(dist) = make.names(row.names(dist))
+  dist_wanted_samples_id = make.names(wanted_samples_id)
+ 
+  dist = dist[dist_wanted_samples_id, dist_wanted_samples_id]
+  map = map[wanted_samples_id, ]
+ 
+  # order by same order (just in case)
+  dist = dist[order(row.names(dist)), order(row.names(dist))]
+  map = map[order(row.names(map)),]
+ 
+  return(list(dist, map))
+}
+
+check_var_NA = function(vars_2_check, map)
+{
+  var_num = vector(mode = 'character',length = length(vars_2_check))
+  NA_num = vector(mode = 'numeric',length = length(vars_2_check))
+  samp_num = vector(mode = 'numeric',length = length(vars_2_check))
+  for ( i in 1:length(vars_2_check))
+  {
+    var_num[i] = as.character( sum(!is.na(( unique(map[[vars_2_check[i]]]) )) ) )
+    if (is.numeric(map[[vars_2_check[i]]] ))
+      var_num[i] = 'Numeric'
+    NA_num[i] = sum(is.na(map[[vars_2_check[i]]]))
+    samp_num[i] = sum(!is.na(map[[vars_2_check[i]]]))
+  }
+  return(list(var_num, NA_num,samp_num))
+}
+
+
+# going over a list of parameters in the map and checking if there is more than 1 option for each of them.
+# returns a list of "good" parameters and prints the names of the "bad" ones
+check_vars_valid = function(map, vars_2_check, min_notNA_num = 0)
+{
+  if (length(vars_2_check) ==0)
+    return(vars_2_check)
+  for ( i in length(vars_2_check):1 )
+  {
+    temp = map[[vars_2_check[i]]]
+    temp = temp[!is.na(temp)]
+    l = length( unique(temp) )
+    if ( l < 2 )
+    {
+      print( sprintf('rm %s, not valid, less than 2 unique values',vars_2_check[i]) )
+      vars_2_check = vars_2_check[-i]
+    } else if ( sum(!is.na(temp)) <= min_notNA_num )
+    {
+      print( sprintf('rm %s, not valid, %s samples not NA',vars_2_check[i], sum(!is.na(temp))) )
+      vars_2_check = vars_2_check[-i]
+    }
+  }
+  return(vars_2_check)
+}
+
+
+
+## fit map and dist dataframes (same samples, same order) and and filter wanted variable to check to remove 
+## variables with to much NAs or too little unique options.
+permanova_organize_data = function(map, dist, vars_2_check, min_notNA_num = 3)
+{
+  map = map[row.names(map) %in% row.names(dist),]
+  map = droplevels(map)
+  map = map[order(row.names(map)),]
+  dist = dist[make.names(row.names(map)), make.names(row.names(map))]
+  
+  vars_2_check_here = check_vars_valid(map, vars_2_check, min_notNA_num)
+  return(list(map, dist, vars_2_check_here))
+}
+
+## running permanova on each of the variables in vars_2_check_here. using map and dist data.
+## controlling for extra_vars (if not c()) and stratifying by strata_var (if not NA)
+permanova_run = function( map, dist, vars_2_check_here, extra_vars = c(), strata_var = NA  )
+{
+  R2 = vector(mode = 'numeric',length = length(vars_2_check_here))
+  pval = vector(mode = 'numeric',length = length(vars_2_check_here))
+  for ( i in 1:length(vars_2_check_here) )
+  {
+    var = vars_2_check_here[i]
+    res = set_dist_map_by_vars(dist, map, c(var, extra_vars))
+    dist_f = res[[1]]
+    map_f = res[[2]]
+    group = map_f[[var]]
+    
+    print(var)
+    
+    # create a formula accounting first for the extra vars (such as age, gender) and than for the interesting var.
+    extra_vars2 = extra_vars[!extra_vars %in% var]
+    prm_vars = c(extra_vars2,var)
+    prm_vars = check_vars_valid(map_f, prm_vars, min_notNA_num = 3)
+    frm = as.formula( sprintf('dist_f ~  %s',paste(prm_vars,collapse = ' + ') ) )
+    
+    if( !is.na(strata_var) )
+      permanova <- vegan::adonis( frm , data = map_f, permutations=999, by = 'margin', strata = map_f[[strata_var]] )
+    else
+      permanova <- vegan::adonis( frm , data = map_f, permutations=999, by = 'margin')
+    
+    pos = which(prm_vars == var)
+    
+    pval[i] =  permanova$aov.tab$`Pr(>F)`[pos]
+    R2[i] = permanova$aov.tab$R2[pos]
+  }
+  res = check_var_NA(vars_2_check_here, map)
+  var_num = res[[1]]; NA_num = res[[2]]; samp_num = res[[3]]
+  
+  perm_df = data.frame(var = vars_2_check_here, R2 = R2, pval = pval, category_num = var_num, NA_num = NA_num, sample_number = samp_num)
+  perm_df = perm_df[rev(order(perm_df$R2)),]
+  
+  perm_type = sprintf('ControlFor_%s',paste(extra_vars, collapse = '_'))
+  if (!is.na(strata_var))
+    perm_type = sprintf('%s_Strata_%s', perm_type, strata_var)
+  if (length(extra_vars) == 0)
+    perm_type = gsub('ControlFor_','',perm_type)
+  perm_df$Permanova_extra_prms = perm_type
+  
+  return(perm_df)
+}
+
+## organize the data and than run permanova
+permanova_organize_and_run = function( map, dist, vars_2_check, min_notNA_num = 3, extra_vars = c(), strata_var = NA )
+{
+  res = permanova_organize_data(map, dist,  vars_2_check, min_notNA_num)
+  map = res[[1]]
+  dist = res[[2]]
+  vars_2_check_here = res[[3]]
+  
+  perm_df = permanova_run( map, dist, vars_2_check_here, extra_vars, strata_var  )
+  return(perm_df)
+}
+
+
+
+```
+
+```{r permanova first sample}
+name = 'First_sample'
+pos = map$First_sample == 'Y'
+perm_df = permanova_organize_and_run(map[pos,], dist_all, c("Age", "Gender", "diagnosis", "smoking_binary"), min_notNA_num = 3, extra_vars = extra_vars, strata_var = NA)
+perm_df$Type = name
+
+```
+```{r}
+perm_df_all = perm_df
+# perm_df_all = rbind(perm_df_all, perm_df)
+```
+
+```{r permanova first sample CD}
+name = 'First_sample_CD'
+pos =  map$First_sample == 'Y' & map$diagnosis == 'CD'
+perm_df = permanova_organize_and_run(map[pos,], dist_all, vars_2_check, min_notNA_num = 3, extra_vars = extra_vars, strata_var = NA)
+perm_df$Type = name
+perm_df_all = rbind(perm_df_all, perm_df)
+
+```
+
+
+```{r}
+#map %>% count(Disease_location_L,Cal_Category, Disease_Activity)
+```
+
+
+```{r saving permanova}
+out_file = sprintf('%s/%s_%s_%s.tsv', out_path, main_name, type, perm_df$Permanova_extra_prms[1])
+write.table(x=perm_df_all, file = out_file, quote = F,sep = '\t',row.names = F)
+
+```
+
+```{r}
+## gets a list of file paths and merges them into one datafrmae
+merge_df_files_to_one_df = function(fls, suffix = 'txt')
+{
+  fls = fls[grepl(suffix, fls)]
+  na_str = c('no_data','_','NA','unknown', 'other','na','No_followup','ND','Unkown')
+  map = read.table(fls[1], header = T, sep = '\t', na.strings = na_str)
+  map$file = fls[1]
+  if(length(fls) > 1)
+  {
+    for ( i in 2:length(fls))
+    {
+      temp = read.table(fls[i], header = T, sep = '\t', na.strings = na_str)
+      temp$file = fls[i]
+      map = rbind(map, temp)
+    }
+  }
+  return(map)
+}
+
+## organize the permanova results data frame - 
+## remove parameters with under filter_num samples or more than filter_num categories
+## and set p value cutoffs and names
+## also filtered only to paramters that were significant ( <0.1 ) in at least min_sig_to_plot settings
+permanova_organize_res_df = function(df, vars_2_keep, filter_num = 10, min_sig_to_plot = 0, fdr_flag = F, filter_many_cats_flag = T)
+{
+  t = df
+  t = t[t$var %in% vars_2_keep,]
+  t$R2 = as.numeric(t$R2)
+  
+  ## filter mostly categoric (dates, etc.)
+  t = t[t$sample_number>filter_num,]
+  if (filter_many_cats_flag )
+    t = t[ as.numeric(t$category_num)<filter_num | is.na(as.numeric(t$category_num)),]
+  t = t[ t$category_num != t$sample_number, ]
+  
+  t$P.val = vector(mode = 'character',length = dim(t)[1])
+  t$P.val[t$pval <= 0.1] = '<= 0.1'
+  t$P.val[t$pval <= 0.05] = '<= 0.05'
+  t$P.val[t$pval > 0.1] = '> 0.1'
+  
+  t$Type2 = sprintf('%s (n=%s)', t$Type, t$NA_num + t$sample_number)
+  
+  if ( min_sig_to_plot > 0 )
+  {
+   good_vars = c()
+   for ( v in t$var )
+   {
+     pos = t$var == v
+     if ( sum( t$P.val[pos] != '> 0.1') >= min_sig_to_plot )
+     {
+       good_vars = c(v, good_vars)
+     }
+   }
+   good_vars = unique(good_vars)
+   t = t[t$var %in% good_vars,]
+
+   name = sprintf('%s_2sig', name)
+  }
+  return(t)
+}
+
+## organize the permanova results data frame - 
+## remove parameters with under filter_num samples or more than filter_num categories
+## and set p value cutoffs and names
+## also filtered only to paramters that were significant ( <0.1 ) in at least min_sig_to_plot settings
+permanova_organize_res_df_fdr = function(df, vars_2_keep, filter_num = 10, min_sig_to_plot = 0)
+{
+  t = df
+  t = t[t$var %in% vars_2_keep,]
+  t$R2 = as.numeric(t$R2)
+  
+  ## filter mostly categoric (dates, etc.)
+  t = t[t$sample_number>filter_num,]
+  t = t[ as.numeric(t$category_num)<filter_num | is.na(as.numeric(t$category_num)),]
+  
+  t$P.val = vector(mode = 'character',length = dim(t)[1])
+  t$P.val[t$pval <= 0.1] = '<= 0.1'
+  t$P.val[t$pval <= 0.05] = '<= 0.05'
+  t$P.val[t$pval > 0.1] = '> 0.1'
+  
+  t$Type2 = sprintf('%s (n=%s)', t$Type, t$NA_num + t$sample_number)
+  
+  t = permanova_add_fdr(t)
+  
+  if ( min_sig_to_plot > 0 )
+  {
+    good_vars = c()
+    for ( v in t$var )
+    {
+      pos = t$var == v
+      if ( sum( t$Q.val[pos] != '> 0.25') >= min_sig_to_plot )
+      {
+        good_vars = c(v, good_vars)
+      }
+    }
+    good_vars = unique(good_vars)
+    t = t[t$var %in% good_vars,]
+    
+    # name?
+    #name = sprintf('%s_2sig', name)
+  }
+  return(t)
+}
+
+permanova_add_fdr = function(t)
+{
+  t$qval = vector(mode = 'numeric',length = length(t$pval))
+  for ( i in unique(t$Type2))
+  {
+    pos = t$Type2 == i
+    t$qval[pos] = p.adjust(t$pval[pos], method = 'BH', n = sum(pos))
+  }
+  t$Q.val = vector(mode = 'character',length = dim(t)[1])
+  t$Q.val[t$qval <= 0.25] = '<= 0.25'
+  t$Q.val[t$qval <= 0.1] = '<= 0.1'
+  t$Q.val[t$qval > 0.25] = '> 0.25'
+  return(t)
+}
+
+```
+
+
+##### Plotting 
+```{r read saved path}
+min_sig_to_plot = 0
+
+path = sprintf('/pita/users/hila/permanova/%s_IIRN_SOURCE_pilot_MGX_%s', date, feature_name)
+
+name = sprintf('%s_IIRN_SOURCE_pilot_MGX_%s_canberra_ControlFor_Age_Gender', date, feature_name)
+
+
+
+
+type = 'canberra'
+
+out_path =  path
+file = sprintf('%s/%s.tsv',out_path, name)
+file
+```
+
+```{r}
+df = read.table(file, header = T,sep = '\t')
+df
+```
+
+```{r}
+#vars_2_keep =  sort(unique(df$var))
+
+#bad_vars = c('DB_box', 'project', 'project2', 'Data', 'DB',
+#             'date_of_diagnosis', 'months_since_first_visit', 'raw',
+#             'raw.pair1', 'raw.pair2', 'final',
+#             'final.pair1','final.pair2', 'ratio.tot', 'ratio1',
+#             'date_of_diagnosis', 'Michael_number', 'Family',
+#             'Behaviour', 'Location', 'include', 'age_at_diagnosis',
+#             'months_since_start.y', 'Stool_number', 'flare_reason',
+#             'scope')
+#vars_2_keep =vars_2_keep[! vars_2_keep %in% bad_vars]
+vars_2_keep = c('Age', 'Gender', 'smoking_binary', 'diagnosis',
+               'Disease_Activity', 'CRP_Category', 'Cal_Category',
+               'TX_bio', 'TX_immuno', 'TX_5ASA',
+               'Disease_location_L', 'Disease_location_B')
+```
+
+
+
+
+```{r organize results df}
+t = permanova_organize_res_df(df, vars_2_keep, filter_num = 6, min_sig_to_plot = min_sig_to_plot, filter_many_cats_flag = T)
+
+t = t[t$Type %in% c('All','All_CD','First_sample','First_sample_CD','Last_sample','Last_sample_CD'),]
+t
+```
+```{r}
+
+t$var %>% unique()
+```
+
+
+```{r}
+sig2_flag = F
+if (sig2_flag)
+{
+  good_vars = c()
+  for ( v in t$var )
+  {
+    pos = t$var == v
+    if ( sum( t$P.val[pos] != '> 0.1') > 1 )
+    {
+      good_vars = c(v, good_vars)
+    }
+  }
+  good_vars = unique(good_vars)
+  t = t[t$var %in% good_vars,]
+
+  name = sprintf('%s_2sig', name)
+  good_vars
+}
+
+```
+
+```{r}
+t$var
+```
+
+```{r}
+# adding a feature name column to t
+t$feature_type = rep(c(feature_name), times =dim(t)[1])
+t
+```
+
+
+
+```{r}
+if(feature_name == "ecs") {
+  t_ecs = t
+} else if(feature_name == "pathways") {
+  t_paths = t
+} else if(feature_name == "species") {
+  t_species = t
+}
+
+```
+
+```{r combine all feature tables}
+t_tot = rbind(t_ecs, t_paths, t_species)
+t_tot
+```
+
+```{r plot permanova}
+library(viridis)
+library(viridisLite)
+g = ggplot(t_tot, aes(y=var, x=Type2, fill = R2*100)) + 
+  geom_tile(colour = 'black') + 
+  # geom_point(shape = 8, aes(colour = P.val))+
+  geom_point(colour = 'white' , aes(shape = P.val, alpha = P.val)) +
+  scale_shape_manual(values=c(8, 4, 46), breaks = c('<= 0.05','<= 0.1','> 0.1')) +
+  scale_alpha_manual(values = c(1,1,0), breaks = c('<= 0.05','<= 0.1','> 0.1')) +#  guides(alpha=FALSE) + 
+  scale_colour_manual(values = c('black',NA), na.translate=F) + ## NA TO GRAY
+  theme_classic() + ylab('') + xlab('') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  # scale_fill_viridis() + 
+  # scale_fill_viridis(option = 'D',
+  scale_fill_gradient(low = 'lightblue',high='blue4') +
+  # scale_fill_gradient(low = 'lightblue',high='blue4',
+  #   rescaler = function(x, to = c(0, 1), from = NULL) 
+  # { ifelse(x<6,  scales::rescale(x,to = to, from = c(min(x, na.rm = TRUE), 10)), 1) } ) +
+  scale_x_discrete(expand=c(0,0)) +
+  theme(legend.key = element_rect(fill = "blue4")) +
+  labs(fill = 'Variance %\nexplained', colour = 'P.val <= 0.1')+  
+  scale_y_discrete(expand=c(0,0)) +
+  theme(panel.background = element_rect(fill = 'gray', colour = 'gray')) +
+  facet_grid(cols = vars(feature_type)) 
+
+g
+```
+
+```{r}
+# that's for a single feature
+if (sig2_flag)
+{
+  ggsave(sprintf('%s/permanova_%s_f.png', out_path, name),plot = g, device = 'png', width = 8,height = 6)
+} else
+{
+  ggsave(sprintf('%s/permanova_%s_f.png', out_path, name),plot = g, device = 'png', width = 4,height =5)
+}
+```
+
+```{r saving tot plot}
+
+out_path_tot = sprintf('/pita/users/hila/permanova/%s_%s_%s_combined', date, cohort, location)
+dir.create(out_path_tot)
+ ggsave(sprintf('%s/permanova_combined.png', out_path_tot),plot = g, device = 'png', width = 8,height = 5)
+```
+
+```{r}
+map %>% filter(First_sample == 'Y') %>% count(diagnosis, Smoking)
+```

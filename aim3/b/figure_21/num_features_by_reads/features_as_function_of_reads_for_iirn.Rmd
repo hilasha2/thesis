@@ -1,0 +1,99 @@
+---
+title: "features_as_function_of_reads"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+list.of.packages <- c("tidyverse")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+lapply(list.of.packages, require, character.only = TRUE)
+```
+
+
+```{r, include = FALSE}
+library('tidyverse')
+library('plotly')
+library('scales')
+
+```
+
+```{r}
+#META <- '/pita/users/hila/analysis/datasets/hmp2_metadata_mgx_no_na_cols_w_bakery_results.tsv'
+META <- '/pita/users/hila/analysis/datasets/hmp2_metadata_mgx_mtx.tsv'
+#META <- "/pita/users/hila/analysis/datasets/SOURCE_Israel_China_data_v12.tsv"
+#META <- '/pita/users/hila/analysis/datasets/IIRN_metadata_23_Feb_2023_added_pilot_and_biobakery_results.tsv'
+```
+
+
+```{r}
+meta.df <- read.delim(META, stringsAsFactors = F, check.names = T)
+head(meta.df)
+```
+
+```{r}
+last_col_names <- meta.df %>% colnames() %>% tail(n=12)
+last_col_names
+```
+```{r}
+meta.df$Patient_group %>% unique()
+```
+```{r}
+meta.df <- meta.df %>% mutate(country_origin = case_when(Patient_group == 'Israeli_Crohns' | Patient_group == 'Israeli_healthy' ~ 'Israel',
+  Patient_group == 'Urban_health' | Patient_group == 'Rural_health' | Patient_group == 'Chinese_crohns' ~ 'China'))
+```
+
+```{r}
+#str <- "pathways"
+#str <- "enzymes"
+#str <- "gene families"
+str <- "MetaPhlAn species"
+title <- sprintf("Number of %s per sample\nas a function of metagenome reads", str)
+p <- meta.df %>% filter(country_origin == 'Israel') %>% 
+  ggplot(aes(x = final_reads_israeli, y = num_species, color = Patient_group2, text = mtg_ID)) +
+  geom_point(size = 3, alpha = 0.75) +
+  scale_x_continuous(labels = scales::unit_format(unit = "M", scale = 1e-6), breaks = seq(0,40000000,2500000)) +
+  ggtitle(title) +
+  labs(x = "# of filtered reads by KneadData (single strand)", 
+       y = paste("# of", str, "per sample")) +
+  theme(text = element_text(size = 12),
+        plot.title = element_text(hjust = 0.5, size = 16), 
+        axis.text.x = element_text(angle = 0)) 
+p
+```
+
+
+```{r}
+#str <- "pathways"
+str <- "enzymes"
+#str <- "gene families"
+#str <- "MetaPhlAn species"
+title <- sprintf("Number of %s per sample\nas a function of metatranscriptome reads", str)
+p <- meta.df %>% ggplot(aes(x = final_mtx, y = humann_ecs_relab_counts_mtx, color = diagnosis, text = External.ID)) +
+  geom_point(size = 3, alpha = 0.75) +
+  scale_x_continuous(labels = scales::unit_format(unit = "M", scale = 1e-6), breaks = seq(0,50000000,10000000)) +
+  ggtitle(title) +
+  labs(x = "# of filtered reads by KneadData (single strand)", 
+       y = paste("# of", str, "per sample")) +
+  theme(text = element_text(size = 12),
+        plot.title = element_text(hjust = 0.5, size = 16), 
+        axis.text.x = element_text(angle = 0)) 
+p
+```
+
+```{r}
+ggplotly(p)
+```
+
+```{r}
+png(sprintf("/pita/users/hila/analysis/plots/%s.png", title), width = 600, height = 400)
+p
+dev.off()
+```
+
+```{r}
+write.table(meta.df, file.path(OUTPUT.DIR, "SOURCE_Israel_China_data_v12.tsv"), sep = "\t", row.names = F, quote = F, na = "")
+
+```
+

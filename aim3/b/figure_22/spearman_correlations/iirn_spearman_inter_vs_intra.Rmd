@@ -1,0 +1,173 @@
+---
+title: "iirn_spearman_inter_vs_intra"
+output: html_document
+---
+```{r}
+#install.packages("ggsignif")
+```
+
+```{r}
+library (tidyverse)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r}
+
+perm_test = function(x, y, perm_num = 9999)
+{
+  res = list()
+  
+  #x = df |> filter(intrapn == 'intra_pn') |> select(coral) 
+  #y = df |> filter(intrapn == 'inter_pn')|> select(coral)
+  
+  x=x[!is.na(x)]
+  y=y[!is.na(y)]
+  
+  xy_rank = rank(c(x,y))
+  x = xy_rank[1:length(x)]
+  y = xy_rank[ (length(x)+1):length(xy_rank) ]
+  diff = abs(mean(x)-mean(y))
+  
+  count=0
+  for ( i in 1:perm_num  )
+  {
+    perm_xy = sample( c( x,y) )
+    perm_x = perm_xy[1:length(x)]
+    perm_y = perm_xy[ (length(x)+1):length(perm_xy) ]
+    perm_diff = abs(mean(perm_x)-mean(perm_y))
+    if ( perm_diff >= diff)
+      count = count+1
+  }
+  
+  res$p.value = (count+1)/(perm_num+1)
+  return(res)
+}
+```
+
+```{r feature name}
+#feature_name = 'species'
+feature_name = 'pathways'
+#feature_name = 'ecs'
+```
+
+```{r}
+if(feature_name == 'species') {
+  path <- '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/metaphlan/merged_with_pilot/metaphlan_species_filtered_1abund_in_1perc_outof10k.tsv'
+} else if(feature_name == 'pathways') {
+  path <- '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/merged_with_pilot/pathbundance_filtered_1abund_in_1perc_outof10k.tsv'
+} else if(feature_name == 'ecs') {
+  path <- '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/merged_with_pilot/ecs_filtered_1abund_in_1perc_outof10k_ecs2name.tsv'
+}
+
+mgx_data <- read.table(file = path, header = T,row.names = 1, comment.char = '', quote="\"", sep='\t')
+mgx_data
+```
+
+```{r}
+meta_path <- '/pita/users/hila/analysis/datasets/IIRN_metadata_31_May_2023_samples_above_threshold_only.tsv'
+mgx_map <- read.table(file = meta_path, header = T, comment.char = '', quote="\"", sep='\t')
+mgx_map
+```
+
+
+```{r}
+# calculating spearman correlations of all sample-pairs 
+mgx_couples <- combn(mgx_map$SampleID, 2) %>% data.frame() %>% t() %>% as.data.frame()
+mgx_couples$coral <- NA
+for (rown in 1:nrow(mgx_couples)) {
+  cor2 = cor(mgx_data[mgx_couples[rown,'V1']], mgx_data[mgx_couples[rown,'V2']], method = "spearman")
+  mgx_couples[rown, 'coral'] <- cor2
+}
+mgx_couples
+```
+
+```{r}
+mgx_data[mgx_couples[1, 'V1']]
+
+```
+
+
+```{r}
+# Adding pnID1 and pnID2 columns matching to V1 and V2 sample names.
+mgx_map1 <- mgx_map %>% select(SampleID,pn_ID) %>% rename(V1 = SampleID, pnID1 = pn_ID)
+mgx_map2 <- mgx_map %>% select(SampleID,pn_ID) %>% rename(V2 = SampleID, pnID2 = pn_ID)
+mgx_longcor1 <- mgx_couples %>% left_join(mgx_map1, by = 'V1')
+mgx_longcor1 <- mgx_longcor1 %>% left_join(mgx_map2, by = 'V2')
+
+mgx_longcor1
+```
+
+
+```{r}
+# Checking whether the paired samples come from the same patient (within) or not (across).
+within_str <- sprintf("%s_Within", feature_name)
+across_str <- sprintf("%s_Across", feature_name)
+
+mgx_longcor1 <- mgx_longcor1 %>% mutate(intrapn = as.character(pnID1 == pnID2))
+mgx_longcor1$intrapn <- mgx_longcor1$intrapn %>% stringr:: str_replace('TRUE', within_str) %>% stringr:: str_replace('FALSE', across_str)
+```
+
+```{r}
+mgx_longcor1 %>% filter(intrapn == within_str)
+```
+
+```{r}
+mgx_perm_results <- 
+  perm_test(x = mgx_longcor1 %>% filter(intrapn == within_str) %>% select(coral), 
+            y = mgx_longcor1 %>% filter(intrapn == across_str) %>% select(coral))
+mgx_perm_results
+```
+
+
+```{r}
+longcor1 <- mgx_longcor1
+longcor1 <- longcor1 %>% separate(intrapn, sep = "_", into = c("type", "between"))
+longcor1
+```
+
+
+```{r}
+library(ggsignif)
+g <- longcor1 %>% ggplot(aes(x=between, y=coral, fill = between), show.legend = FALSE) + 
+  geom_violin(show.legend = FALSE) +
+  geom_boxplot(width = .3, show.legend = FALSE) +   
+  labs(x = 'Across / Within subjects', y = 'Spearman r') +
+  facet_wrap(~type) + 
+  ggsignif::geom_signif(comparisons = list(c("Within", "Across")), 
+                        map_signif_level = T, textsize =4.5, vjust = 0.5) + 
+  theme_bw() + 
+    theme(panel.grid = element_blank(),
+          plot.background = element_blank(),
+          strip.background = element_rect(fill = "white"),
+          axis.text = element_text(size=12),
+          axis.text.x = element_text(angle = 30,  hjust=1),
+          title = element_text(size = 6),
+          axis.title = element_text(size = 16),
+          strip.text = element_text(size = 14)) +
+  #scale_fill_manual(values = c("red", "blue"), labels = c("Inter_pn", "Intra_pn")) +
+  ggtitle("pn ID correlations")
+g
+```
+
+
+```{r}
+longcor1$pnID1 %>% unique() %>% length()
+
+
+```
+
+```{r}
+mgx_perm_results
+```
+
+```{r average correlation}
+longcor1 %>% group_by(between) %>% summarise(avg = mean(coral), std = sd(coral))
+
+```
+
+```{r saving plot}
+ ggsave(sprintf('/pita/users/hila/analysis/plots/IIRN_SOURCE_pilot_mgx_spearman_corr_%s.png', feature_name),plot = g, device = 'png', width = 4,height = 5)
+
+
+```

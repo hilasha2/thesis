@@ -1,0 +1,233 @@
+---
+title: "pcoa"
+output: html_document
+---
+
+```{r setup}
+
+#knitr::opts_chunk$set(echo = FALSE)
+#list.of.packages <- c("tidyverse", "plotly")
+#new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+#if(length(new.packages)) install.packages(new.packages)
+#lapply(list.of.packages, require, character.only = TRUE)
+
+```
+
+```{r}
+library('tidyverse')
+library('plotly')
+library('vegan')
+library('ape')
+
+```
+
+```{r paths}
+SPECIES <- '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/metaphlan/merged_with_pilot/metaphlan_species_filtered_1abund_in_1perc_outof10k.tsv'
+#META <- '/pita/users/hila/analysis/datasets/IIRN_metadata_23_Feb_2023_added_pilot_and_biobakery_results.tsv'
+META <- '/pita/users/hila/analysis/datasets/IIRN_metadata_31_May_2023_samples_above_threshold_only.tsv'
+```
+
+
+```{r reading data}
+species.df <- read.delim(SPECIES, stringsAsFactors = F, check.names = F, sep = "\t", row.names = 1)
+species.df
+```
+
+```{r}
+meta.df <- read.delim(META, stringsAsFactors = F, check.names = F, sep = "\t", row.names = 1)
+meta.df
+
+```
+
+```{r}
+# # calculating distance matrix
+# df.dist <- vegdist(species.df, method = "bray")
+# PCOA <- pcoa(df.dist)
+# 
+# # plot the eigenvalues and interpret
+# #barplot(PCOA$values$Relative_eig[1:10])
+# 
+# # Some distance measures may result in negative eigenvalues. In that case, add a correction:
+# #PCOA <- pcoa(dist, correction = "cailliez")
+# 
+# # Plot your results
+# biplot.pcoa(PCOA)
+# 
+# # You see what`s missing? 
+# # Indeed, there are no species plotted on this biplot. 
+# # That's because we used a dissimilarity matrix (sites x sites) 
+# # as input for the PCOA function. 
+# # Hence, no species scores could be calculated. 
+# #However, we could work around this problem like this:
+# #biplot.pcoa(PCOA, species.df)
+
+```
+
+```{r}
+# x = species.df.T [samples x features]
+pcoa.mine <- function(x, index = "bray/curtis", k = 2) {
+  # Performs a PCoA ordination
+  library(labdsv)
+  D <- dsvdis(x, index)
+  pc <- pco(D, k) # pc$points [samples x 2]
+  ord <- pc
+  toteig <- sum(pc$eig[pc$eig>0])
+  ord$ordnames <- sprintf("PCo %d (%0.1f%%)", 1:k, 100 * pc$eig[1:k] / toteig)
+    return (ord)
+}
+```
+
+```{r}
+ord <- species.df %>% t() %>% pcoa.mine()
+#ord
+```
+
+
+```{r}
+pcos <- c(1,2)
+pts <- as.data.frame(ord$points[,pcos])
+colnames(pts) <- c("dim1", "dim2")
+pts
+```
+
+```{r}
+# axes labels
+dim.names <- ord$ordnames[pcos]
+dim.names
+```
+
+```{r}
+# Finding the rows in which rownames(meta.df[metamatch]) == rownames(pts). 
+metamatch <- match(rownames(pts), rownames(meta.df))
+if (any(is.na(metamatch))) {
+  pts <- pts[!is.na(metamatch),]
+  metamatch <- metamatch[!is.na(metamatch)]
+  }
+metamatch
+```
+
+```{r}
+# extract a column in the metadata in the order fitting rownames(pts)
+getmeta <- function(meta, name) {
+  tgt <- name == colnames(meta)
+  if (any(tgt)) {
+            return (meta[metamatch,tgt])
+        }
+        stop(sprintf("%s is not a metadata or feature.", name))
+    }
+
+```
+
+
+```{r}
+colby <- meta.df %>% getmeta("diagnosis") # CD or Ctl
+colby
+```
+
+```{r}
+pts$diagnosis <- colby
+pts
+```
+
+```{r}
+pts$project <- meta.df %>% getmeta("project2")
+pts$samples <- rownames(pts)
+pts
+```
+
+
+```{r}
+ggp <- pts %>% ggplot(aes(x = dim1, y = dim2, colour = diagnosis, shape = project)) + 
+  theme_classic() +
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) +
+  theme(axis.text.y=element_blank(), axis.ticks.y=element_blank())
+ggp <- ggp + xlab(dim.names[1]) + ylab(dim.names[2])
+ggp
+
+```
+
+
+```{r}
+
+# Discrete data uses the Set1 palette
+# https://r-graph-gallery.com/38-rcolorbrewers-palettes.html
+#ggp <- ggp + scale_fill_brewer(palette = "Set1")
+ggp <- ggp + scale_colour_brewer(palette = "Set1")
+
+# Legend
+# shape 21 == circle filled
+#colour_title <- "diagnosis"
+#col_guide <- guide_legend(title = colour_title, override.aes = list(size=3, shape=21))
+#ggp <- ggp + guides(colour = col_guide)
+
+ggp
+
+```
+
+```{r}
+ggp <- ggp + geom_point(size = 3)
+
+ggp
+```
+```{r}
+
+png('~/analysis/plots/iirn_source_pilot_mgx_pcoa_updated.png')
+ggp
+dev.off()
+```
+
+
+```{r}
+
+ggplotly(ggp, tooltip = "text")
+```
+
+
+
+
+
+```{r}
+
+
+#colour_names <- colour_override # for gini simpson
+#colour_names[names(colour_override)] <- names(colour_override)
+                
+#ggp <- ggp + ggscale_manual(values=unlist(colour_override),
+#                                            breaks=names(colour_names),
+#                                            labels=unlist(colour_names))
+#col_guide <- guide_legend(title = colour_title,
+#                                      override.aes = list(size=3, shape=21))
+
+
+#if (length(levels(colby)) > 9) {
+#            library(RColorBrewer)
+#            ggp <- ggp + ggscale_manual(values = colorRampPalette(
+#                rev(brewer.pal(n = 7, name = "RdYlBu")))(length(levels(colby))))
+#            col_guide <- guide_legend(title = colour_title,
+#                                    override.aes = list(size=3, shape=21))
+#}
+```
+
+
+```{r}
+# Helper to add text annotations
+# xr <- 0.0018
+# dx <- xr * (max(pts[,1]) - min(pts[,1]))
+# dy <- 1.1 * xr * (max(pts[,2]) - min(pts[,2]))
+# halo_quality <- 12
+# put_text <- function(x, y, text, ...) {
+#   if (text_halo) {
+#     phi <- 2 * pi / halo_quality
+#     for (i in 1:halo_quality) {
+#       ggp <<- ggp + annotate("text", label=text, color="white",
+#                              x = x + dx*cos((i - 0.5) * phi),
+#                              y = y + dy*sin((i - 0.5) * phi), ...)
+#     }
+#     }
+#   ggp <<- ggp + annotate("text", label=text, x=x, y=y, ..., color="black")
+# }
+
+```
+
+
+```
