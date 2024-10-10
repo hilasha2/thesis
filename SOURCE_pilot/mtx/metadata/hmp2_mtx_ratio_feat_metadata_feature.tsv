@@ -1,0 +1,403 @@
+	_feature_id	_core_var	_ratio_core_cat	_mean_ratio_cat	_RNA_prev	_DNA_prev	_cat
+TRNA-CHARGING-PWY: tRNA charging	TRNA-CHARGING-PWY: tRNA charging	core	other	r:d>1	else	DNA exists	a
+PWY-2942: L-lysine biosynthesis III	PWY-2942: L-lysine biosynthesis III	core	other	r:d>1	else	DNA exists	a
+PWY-5695: inosine 5'-phosphate degradation	PWY-5695: inosine 5'-phosphate degradation	core	other	r:d>1	else	DNA exists	a
+COA-PWY: coenzyme A biosynthesis I (prokaryotic)	COA-PWY: coenzyme A biosynthesis I (prokaryotic)	core	other	r:d>1	else	DNA exists	a
+ILEUSYN-PWY: L-isoleucine biosynthesis I (from threonine)	ILEUSYN-PWY: L-isoleucine biosynthesis I (from threonine)	core	other	r:d>1	else	DNA exists	a
+VALSYN-PWY: L-valine biosynthesis	VALSYN-PWY: L-valine biosynthesis	core	other	r:d>1	else	DNA exists	a
+1CMET2-PWY: folate transformations III (E. coli)	1CMET2-PWY: folate transformations III (E. coli)	core	other	r:d>1	else	DNA exists	a
+BRANCHED-CHAIN-AA-SYN-PWY: superpathway of branched chain amino acid biosynthesis	BRANCHED-CHAIN-AA-SYN-PWY: superpathway of branched chain amino acid biosynthesis	core	other	r:d>1	else	DNA exists	a
+PWY-5103: L-isoleucine biosynthesis III	PWY-5103: L-isoleucine biosynthesis III	core	other	r:d>1	else	DNA exists	a
+PWY-6609: adenine and adenosine salvage III	PWY-6609: adenine and adenosine salvage III	core	other	r:d>1	else	DNA exists	a
+PWY-841: superpathway of purine nucleotides de novo biosynthesis I	PWY-841: superpathway of purine nucleotides de novo biosynthesis I	core	other	r:d>1	else	DNA exists	a
+PWY-7663: gondoate biosynthesis (anaerobic)	PWY-7663: gondoate biosynthesis (anaerobic)	core	other	r:d>1	else	DNA exists	a
+PWY-6737: starch degradation V	PWY-6737: starch degradation V	core	other	r:d>1	else	DNA exists	a
+PWY-5973: cis-vaccenate biosynthesis	PWY-5973: cis-vaccenate biosynthesis	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-3841: folate transformations II (plants)	PWY-3841: folate transformations II (plants)	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-7208: superpathway of pyrimidine nucleobases salvage	PWY-7208: superpathway of pyrimidine nucleobases salvage	core	other	r:d>1	else	DNA exists	a
+PWY0-1296: purine ribonucleosides degradation	PWY0-1296: purine ribonucleosides degradation	core	other	r:d>1	else	DNA exists	a
+CALVIN-PWY: Calvin-Benson-Bassham cycle	CALVIN-PWY: Calvin-Benson-Bassham cycle	core	other	r:d>1	else	DNA exists	a
+PWY-5104: L-isoleucine biosynthesis IV	PWY-5104: L-isoleucine biosynthesis IV	core	other	r:d>1	else	DNA exists	a
+ANAEROFRUCAT-PWY: homolactic fermentation	ANAEROFRUCAT-PWY: homolactic fermentation	core	other	r:d>1	else	DNA exists	a
+PWY-6123: inosine-5'-phosphate biosynthesis I	PWY-6123: inosine-5'-phosphate biosynthesis I	core	r:d=>1	r:d>1	else	DNA exists	a
+NONOXIPENT-PWY: pentose phosphate pathway (non-oxidative branch) I	NONOXIPENT-PWY: pentose phosphate pathway (non-oxidative branch) I	core	other	r:d>1	else	DNA exists	a
+PWY-6124: inosine-5'-phosphate biosynthesis II	PWY-6124: inosine-5'-phosphate biosynthesis II	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-5659: GDP-mannose biosynthesis	PWY-5659: GDP-mannose biosynthesis	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-6125: superpathway of guanosine nucleotides de novo biosynthesis II	PWY-6125: superpathway of guanosine nucleotides de novo biosynthesis II	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-7229: superpathway of adenosine nucleotides de novo biosynthesis I	PWY-7229: superpathway of adenosine nucleotides de novo biosynthesis I	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-6126: superpathway of adenosine nucleotides de novo biosynthesis II	PWY-6126: superpathway of adenosine nucleotides de novo biosynthesis II	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-7221: guanosine ribonucleotides de novo biosynthesis	PWY-7221: guanosine ribonucleotides de novo biosynthesis	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-7242: D-fructuronate degradation	PWY-7242: D-fructuronate degradation	core	other	r:d>1	else	DNA exists	a
+PWY-7220: adenosine deoxyribonucleotides de novo biosynthesis II	PWY-7220: adenosine deoxyribonucleotides de novo biosynthesis II	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-7222: guanosine deoxyribonucleotides de novo biosynthesis II	PWY-7222: guanosine deoxyribonucleotides de novo biosynthesis II	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-6608: guanosine nucleotides degradation III	PWY-6608: guanosine nucleotides degradation III	core	other	r:d>1	else	DNA exists	a
+PWY-5030: L-histidine degradation III	PWY-5030: L-histidine degradation III	core	other	r:d>1	else	DNA exists	a
+HISDEG-PWY: L-histidine degradation I	HISDEG-PWY: L-histidine degradation I	core	other	r:d>1	else	DNA exists	a
+GLYCOGENSYNTH-PWY: glycogen biosynthesis I (from ADP-D-Glucose)	GLYCOGENSYNTH-PWY: glycogen biosynthesis I (from ADP-D-Glucose)	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-7219: adenosine ribonucleotides de novo biosynthesis	PWY-7219: adenosine ribonucleotides de novo biosynthesis	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-7197: pyrimidine deoxyribonucleotide phosphorylation	PWY-7197: pyrimidine deoxyribonucleotide phosphorylation	core	other	r:d>1	else	DNA exists	a
+PWY-7228: superpathway of guanosine nucleotides de novo biosynthesis I	PWY-7228: superpathway of guanosine nucleotides de novo biosynthesis I	core	r:d=>1	r:d>1	else	DNA exists	a
+ANAGLYCOLYSIS-PWY: glycolysis III (from glucose)	ANAGLYCOLYSIS-PWY: glycolysis III (from glucose)	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-1042: glycolysis IV	PWY-1042: glycolysis IV	core	r:d=>1	r:d>1	else	DNA exists	a
+SER-GLYSYN-PWY: superpathway of L-serine and glycine biosynthesis I	SER-GLYSYN-PWY: superpathway of L-serine and glycine biosynthesis I	core	r:d=>1	r:d>1	else	DNA exists	a
+PWY-5484: glycolysis II (from fructose 6-phosphate)	PWY-5484: glycolysis II (from fructose 6-phosphate)	core	r:d=>1	r:d>1	else	DNA exists	a
+GLYCOLYSIS: glycolysis I (from glucose 6-phosphate)	GLYCOLYSIS: glycolysis I (from glucose 6-phosphate)	core	r:d=>1	r:d>1	else	DNA exists	a
+GLUCONEO-PWY: gluconeogenesis I	GLUCONEO-PWY: gluconeogenesis I	core	r:d=>1	r:d>1	else	DNA exists	a
+RIBOSYN2-PWY: flavin biosynthesis I (bacteria and plants)	RIBOSYN2-PWY: flavin biosynthesis I (bacteria and plants)	core	d:r<1	r:d<1	else	DNA exists	b
+HISTSYN-PWY: L-histidine biosynthesis	HISTSYN-PWY: L-histidine biosynthesis	core	d:r<1	r:d<1	else	DNA exists	b
+PEPTIDOGLYCANSYN-PWY: peptidoglycan biosynthesis I (meso-diaminopimelate containing)	PEPTIDOGLYCANSYN-PWY: peptidoglycan biosynthesis I (meso-diaminopimelate containing)	core	d:r<1	r:d<1	else	DNA exists	b
+THRESYN-PWY: superpathway of L-threonine biosynthesis	THRESYN-PWY: superpathway of L-threonine biosynthesis	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-6387: UDP-N-acetylmuramoyl-pentapeptide biosynthesis I (meso-diaminopimelate containing)	PWY-6387: UDP-N-acetylmuramoyl-pentapeptide biosynthesis I (meso-diaminopimelate containing)	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-7539: 6-hydroxymethyl-dihydropterin diphosphate biosynthesis III (Chlamydia)	PWY-7539: 6-hydroxymethyl-dihydropterin diphosphate biosynthesis III (Chlamydia)	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-6168: flavin biosynthesis III (fungi)	PWY-6168: flavin biosynthesis III (fungi)	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-6385: peptidoglycan biosynthesis III (mycobacteria)	PWY-6385: peptidoglycan biosynthesis III (mycobacteria)	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-6386: UDP-N-acetylmuramoyl-pentapeptide biosynthesis II (lysine-containing)	PWY-6386: UDP-N-acetylmuramoyl-pentapeptide biosynthesis II (lysine-containing)	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-3001: superpathway of L-isoleucine biosynthesis I	PWY-3001: superpathway of L-isoleucine biosynthesis I	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-5097: L-lysine biosynthesis VI	PWY-5097: L-lysine biosynthesis VI	core	d:r<1	r:d<1	else	DNA exists	b
+PWY0-1586: peptidoglycan maturation (meso-diaminopimelate containing)	PWY0-1586: peptidoglycan maturation (meso-diaminopimelate containing)	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-6147: 6-hydroxymethyl-dihydropterin diphosphate biosynthesis I	PWY-6147: 6-hydroxymethyl-dihydropterin diphosphate biosynthesis I	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-4242	PWY-4242	core	d:r<1	r:d<1	else	DNA exists	b
+COA-PWY-1: superpathway of coenzyme A biosynthesis III (mammals)	COA-PWY-1: superpathway of coenzyme A biosynthesis III (mammals)	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-5686: UMP biosynthesis I	PWY-5686: UMP biosynthesis I	core	other	r:d<1	else	DNA exists	b
+PWY-6700: queuosine biosynthesis I (de novo)	PWY-6700: queuosine biosynthesis I (de novo)	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-6151: S-adenosyl-L-methionine salvage I	PWY-6151: S-adenosyl-L-methionine salvage I	core	d:r<1	r:d<1	else	DNA exists	b
+PANTOSYN-PWY: superpathway of coenzyme A biosynthesis I (bacteria)	PANTOSYN-PWY: superpathway of coenzyme A biosynthesis I (bacteria)	core	other	r:d<1	else	DNA exists	b
+DTDPRHAMSYN-PWY: dTDP-&beta;-L-rhamnose biosynthesis	DTDPRHAMSYN-PWY: dTDP-&beta;-L-rhamnose biosynthesis	core	other	r:d<1	else	DNA exists	b
+PWY-6122: 5-aminoimidazole ribonucleotide biosynthesis II	PWY-6122: 5-aminoimidazole ribonucleotide biosynthesis II	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-6277: superpathway of 5-aminoimidazole ribonucleotide biosynthesis	PWY-6277: superpathway of 5-aminoimidazole ribonucleotide biosynthesis	core	d:r<1	r:d<1	else	DNA exists	b
+ARGININE-SYN4-PWY: L-ornithine biosynthesis II	ARGININE-SYN4-PWY: L-ornithine biosynthesis II	core	d:r<1	r:d<1	else	DNA exists	b
+RHAMCAT-PWY: L-rhamnose degradation I	RHAMCAT-PWY: L-rhamnose degradation I	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-6703: preQ0 biosynthesis	PWY-6703: preQ0 biosynthesis	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-6121: 5-aminoimidazole ribonucleotide biosynthesis I	PWY-6121: 5-aminoimidazole ribonucleotide biosynthesis I	core	other	r:d<1	else	DNA exists	b
+PANTO-PWY: phosphopantothenate biosynthesis I	PANTO-PWY: phosphopantothenate biosynthesis I	core	other	r:d<1	else	DNA exists	b
+PWY-6163: chorismate biosynthesis from 3-dehydroquinate	PWY-6163: chorismate biosynthesis from 3-dehydroquinate	core	d:r<1	r:d<1	else	DNA exists	b
+PYRIDNUCSYN-PWY: NAD de novo biosynthesis I (from aspartate)	PYRIDNUCSYN-PWY: NAD de novo biosynthesis I (from aspartate)	core	other	r:d<1	else	DNA exists	b
+ASPASN-PWY: superpathway of L-aspartate and L-asparagine biosynthesis	ASPASN-PWY: superpathway of L-aspartate and L-asparagine biosynthesis	core	other	r:d<1	else	DNA exists	b
+NONMEVIPP-PWY: methylerythritol phosphate pathway I	NONMEVIPP-PWY: methylerythritol phosphate pathway I	core	other	r:d<1	else	DNA exists	b
+FASYN-INITIAL-PWY: superpathway of fatty acid biosynthesis initiation (E. coli)	FASYN-INITIAL-PWY: superpathway of fatty acid biosynthesis initiation (E. coli)	core	other	r:d<1	else	DNA exists	b
+PWY-7111: pyruvate fermentation to isobutanol (engineered)	PWY-7111: pyruvate fermentation to isobutanol (engineered)	core	other	r:d<1	else	DNA exists	b
+PWY-5667: CDP-diacylglycerol biosynthesis I	PWY-5667: CDP-diacylglycerol biosynthesis I	core	other	r:d<1	else	DNA exists	b
+PWY0-1319: CDP-diacylglycerol biosynthesis II	PWY0-1319: CDP-diacylglycerol biosynthesis II	core	other	r:d<1	else	DNA exists	b
+PWY-1269: CMP-3-deoxy-D-manno-octulosonate biosynthesis	PWY-1269: CMP-3-deoxy-D-manno-octulosonate biosynthesis	core	d:r<1	r:d<1	else	DNA exists	b
+PWY-7199: pyrimidine deoxyribonucleosides salvage	PWY-7199: pyrimidine deoxyribonucleosides salvage	core	other	r:d<1	else	DNA exists	b
+CITRULBIO-PWY: L-citrulline biosynthesis	CITRULBIO-PWY: L-citrulline biosynthesis	core	other	r:d<1	else	DNA exists	b
+COMPLETE-ARO-PWY: superpathway of aromatic amino acid biosynthesis	COMPLETE-ARO-PWY: superpathway of aromatic amino acid biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+TRPSYN-PWY: L-tryptophan biosynthesis	TRPSYN-PWY: L-tryptophan biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+TEICHOICACID-PWY: poly(glycerol phosphate) wall teichoic acid biosynthesis	TEICHOICACID-PWY: poly(glycerol phosphate) wall teichoic acid biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+ARGSYNBSUB-PWY: L-arginine biosynthesis II (acetyl cycle)	ARGSYNBSUB-PWY: L-arginine biosynthesis II (acetyl cycle)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PHOSLIPSYN-PWY: superpathway of phospholipid biosynthesis I (bacteria)	PHOSLIPSYN-PWY: superpathway of phospholipid biosynthesis I (bacteria)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-5505: L-glutamate and L-glutamine biosynthesis	PWY-5505: L-glutamate and L-glutamine biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY4FS-7: phosphatidylglycerol biosynthesis I (plastidic)	PWY4FS-7: phosphatidylglycerol biosynthesis I (plastidic)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY4FS-8: phosphatidylglycerol biosynthesis II (non-plastidic)	PWY4FS-8: phosphatidylglycerol biosynthesis II (non-plastidic)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6527: stachyose degradation	PWY-6527: stachyose degradation	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY0-1241: ADP-L-glycero-&beta;-D-manno-heptose biosynthesis	PWY0-1241: ADP-L-glycero-&beta;-D-manno-heptose biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY66-422	PWY66-422	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+OANTIGEN-PWY: O-antigen building blocks biosynthesis (E. coli)	OANTIGEN-PWY: O-antigen building blocks biosynthesis (E. coli)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-5188: tetrapyrrole biosynthesis I (from glutamate)	PWY-5188: tetrapyrrole biosynthesis I (from glutamate)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6353: purine nucleotides degradation II (aerobic)	PWY-6353: purine nucleotides degradation II (aerobic)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+COLANSYN-PWY: colanic acid building blocks biosynthesis	COLANSYN-PWY: colanic acid building blocks biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+GLCMANNANAUT-PWY: superpathway of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminate degradation	GLCMANNANAUT-PWY: superpathway of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminate degradation	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6606: guanosine nucleotides degradation II	PWY-6606: guanosine nucleotides degradation II	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+UDPNAGSYN-PWY: UDP-N-acetyl-D-glucosamine biosynthesis I	UDPNAGSYN-PWY: UDP-N-acetyl-D-glucosamine biosynthesis I	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+SALVADEHYPOX-PWY: adenosine nucleotides degradation II	SALVADEHYPOX-PWY: adenosine nucleotides degradation II	variable		r:d>1	RNA=0, DNA>0	DNA exists	c
+FASYN-ELONG-PWY: fatty acid elongation -- saturated	FASYN-ELONG-PWY: fatty acid elongation -- saturated	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+GLYCOLYSIS-E-D: superpathway of glycolysis and the Entner-Doudoroff pathway	GLYCOLYSIS-E-D: superpathway of glycolysis and the Entner-Doudoroff pathway	variable		r:d>1	RNA=0, DNA>0	DNA exists	c
+PWY-5989: stearate biosynthesis II (bacteria and plants)	PWY-5989: stearate biosynthesis II (bacteria and plants)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6282: palmitoleate biosynthesis I (from (5Z)-dodec-5-enoate)	PWY-6282: palmitoleate biosynthesis I (from (5Z)-dodec-5-enoate)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6901: superpathway of glucose and xylose degradation	PWY-6901: superpathway of glucose and xylose degradation	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-7388: octanoyl-[acyl-carrier protein] biosynthesis (mitochondria, yeast)	PWY-7388: octanoyl-[acyl-carrier protein] biosynthesis (mitochondria, yeast)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-7664: oleate biosynthesis IV (anaerobic)	PWY-7664: oleate biosynthesis IV (anaerobic)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY0-862: (5Z)-dodecenoate biosynthesis I	PWY0-862: (5Z)-dodecenoate biosynthesis I	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+ARG+POLYAMINE-SYN: superpathway of arginine and polyamine biosynthesis	ARG+POLYAMINE-SYN: superpathway of arginine and polyamine biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+BIOTIN-BIOSYNTHESIS-PWY: biotin biosynthesis I	BIOTIN-BIOSYNTHESIS-PWY: biotin biosynthesis I	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+CENTFERM-PWY: pyruvate fermentation to butanoate	CENTFERM-PWY: pyruvate fermentation to butanoate	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+DAPLYSINESYN-PWY: L-lysine biosynthesis I	DAPLYSINESYN-PWY: L-lysine biosynthesis I	variable		r:d>1	RNA=0, DNA>0	DNA exists	c
+FUC-RHAMCAT-PWY: superpathway of fucose and rhamnose degradation	FUC-RHAMCAT-PWY: superpathway of fucose and rhamnose degradation	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+FUCCAT-PWY: fucose degradation	FUCCAT-PWY: fucose degradation	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+GALACTARDEG-PWY: D-galactarate degradation I	GALACTARDEG-PWY: D-galactarate degradation I	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+GLUCARGALACTSUPER-PWY: superpathway of D-glucarate and D-galactarate degradation	GLUCARGALACTSUPER-PWY: superpathway of D-glucarate and D-galactarate degradation	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+GLUCOSE1PMETAB-PWY: glucose and glucose-1-phosphate degradation	GLUCOSE1PMETAB-PWY: glucose and glucose-1-phosphate degradation	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+GLUDEG-I-PWY: GABA shunt	GLUDEG-I-PWY: GABA shunt	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+GLYCOCAT-PWY: glycogen degradation I	GLYCOCAT-PWY: glycogen degradation I	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+GOLPDLCAT-PWY: superpathway of glycerol degradation to 1,3-propanediol	GOLPDLCAT-PWY: superpathway of glycerol degradation to 1,3-propanediol	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+HEME-BIOSYNTHESIS-II: heme b biosynthesis I (aerobic)	HEME-BIOSYNTHESIS-II: heme b biosynthesis I (aerobic)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+HEMESYN2-PWY: heme b biosynthesis II (oxygen-independent)	HEMESYN2-PWY: heme b biosynthesis II (oxygen-independent)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+HEXITOLDEGSUPER-PWY: superpathway of hexitol degradation (bacteria)	HEXITOLDEGSUPER-PWY: superpathway of hexitol degradation (bacteria)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+HOMOSER-METSYN-PWY: L-methionine biosynthesis I	HOMOSER-METSYN-PWY: L-methionine biosynthesis I	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+LACTOSECAT-PWY: lactose and galactose degradation I	LACTOSECAT-PWY: lactose and galactose degradation I	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+MET-SAM-PWY: superpathway of S-adenosyl-L-methionine biosynthesis	MET-SAM-PWY: superpathway of S-adenosyl-L-methionine biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+METHGLYUT-PWY: superpathway of methylglyoxal degradation	METHGLYUT-PWY: superpathway of methylglyoxal degradation	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+METSYN-PWY: superpathway of L-homoserine and L-methionine biosynthesis	METSYN-PWY: superpathway of L-homoserine and L-methionine biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+NAD-BIOSYNTHESIS-II: NAD salvage pathway III (to nicotinamide riboside)	NAD-BIOSYNTHESIS-II: NAD salvage pathway III (to nicotinamide riboside)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+P42-PWY: incomplete reductive TCA cycle	P42-PWY: incomplete reductive TCA cycle	variable		r:d>1	RNA=0, DNA>0	DNA exists	c
+P441-PWY: superpathway of N-acetylneuraminate degradation	P441-PWY: superpathway of N-acetylneuraminate degradation	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+P461-PWY: hexitol fermentation to lactate, formate, ethanol and acetate	P461-PWY: hexitol fermentation to lactate, formate, ethanol and acetate	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+POLYAMINSYN3-PWY: superpathway of polyamine biosynthesis II	POLYAMINSYN3-PWY: superpathway of polyamine biosynthesis II	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+POLYAMSYN-PWY: superpathway of polyamine biosynthesis I	POLYAMSYN-PWY: superpathway of polyamine biosynthesis I	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PPGPPMET-PWY: ppGpp metabolism	PPGPPMET-PWY: ppGpp metabolism	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-2723: trehalose degradation V	PWY-2723: trehalose degradation V	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-4041: &gamma;-glutamyl cycle	PWY-4041: &gamma;-glutamyl cycle	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-5005: biotin biosynthesis II	PWY-5005: biotin biosynthesis II	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-5022: 4-aminobutanoate degradation V	PWY-5022: 4-aminobutanoate degradation V	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-5304: superpathway of sulfur oxidation (Acidianus ambivalens)	PWY-5304: superpathway of sulfur oxidation (Acidianus ambivalens)	variable		r:d>1	RNA=0, DNA>0	DNA exists	c
+PWY-5345: superpathway of L-methionine biosynthesis (by sulfhydrylation)	PWY-5345: superpathway of L-methionine biosynthesis (by sulfhydrylation)	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-5347: superpathway of L-methionine biosynthesis (transsulfuration)	PWY-5347: superpathway of L-methionine biosynthesis (transsulfuration)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-5384: sucrose degradation IV (sucrose phosphorylase)	PWY-5384: sucrose degradation IV (sucrose phosphorylase)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-5837: 2-carboxy-1,4-naphthoquinol biosynthesis	PWY-5837: 2-carboxy-1,4-naphthoquinol biosynthesis	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-5838: superpathway of menaquinol-8 biosynthesis I	PWY-5838: superpathway of menaquinol-8 biosynthesis I	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-5861: superpathway of demethylmenaquinol-8 biosynthesis I	PWY-5861: superpathway of demethylmenaquinol-8 biosynthesis I	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-5897: superpathway of menaquinol-11 biosynthesis	PWY-5897: superpathway of menaquinol-11 biosynthesis	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-5898: superpathway of menaquinol-12 biosynthesis	PWY-5898: superpathway of menaquinol-12 biosynthesis	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-5899: superpathway of menaquinol-13 biosynthesis	PWY-5899: superpathway of menaquinol-13 biosynthesis	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-6470: peptidoglycan biosynthesis V (&beta;-lactam resistance)	PWY-6470: peptidoglycan biosynthesis V (&beta;-lactam resistance)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6471: peptidoglycan biosynthesis IV (Enterococcus faecium)	PWY-6471: peptidoglycan biosynthesis IV (Enterococcus faecium)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6519: 8-amino-7-oxononanoate biosynthesis I	PWY-6519: 8-amino-7-oxononanoate biosynthesis I	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6531: mannitol cycle	PWY-6531: mannitol cycle	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6545: pyrimidine deoxyribonucleotides de novo biosynthesis III	PWY-6545: pyrimidine deoxyribonucleotides de novo biosynthesis III	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6549: L-glutamine biosynthesis III	PWY-6549: L-glutamine biosynthesis III	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-6572: chondroitin sulfate degradation I (bacterial)	PWY-6572: chondroitin sulfate degradation I (bacterial)	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-6590: superpathway of Clostridium acetobutylicum acidogenic fermentation	PWY-6590: superpathway of Clostridium acetobutylicum acidogenic fermentation	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6731: starch degradation III	PWY-6731: starch degradation III	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-6863: pyruvate fermentation to hexanol (engineered)	PWY-6863: pyruvate fermentation to hexanol (engineered)	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-6936: seleno-amino acid biosynthesis (plants)	PWY-6936: seleno-amino acid biosynthesis (plants)	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-6969: TCA cycle V (2-oxoglutarate synthase)	PWY-6969: TCA cycle V (2-oxoglutarate synthase)	variable		r:d>1	RNA=0, DNA>0	DNA exists	c
+PWY-7115: C4 photosynthetic carbon assimilation cycle, NAD-ME type	PWY-7115: C4 photosynthetic carbon assimilation cycle, NAD-ME type	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-7184: pyrimidine deoxyribonucleotides de novo biosynthesis I	PWY-7184: pyrimidine deoxyribonucleotides de novo biosynthesis I	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-7198: pyrimidine deoxyribonucleotides de novo biosynthesis IV	PWY-7198: pyrimidine deoxyribonucleotides de novo biosynthesis IV	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-7210: pyrimidine deoxyribonucleotides biosynthesis from CTP	PWY-7210: pyrimidine deoxyribonucleotides biosynthesis from CTP	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-7211: superpathway of pyrimidine deoxyribonucleotides de novo biosynthesis	PWY-7211: superpathway of pyrimidine deoxyribonucleotides de novo biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-7315: dTDP-N-acetylthomosamine biosynthesis	PWY-7315: dTDP-N-acetylthomosamine biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY-7328: superpathway of UDP-glucose-derived O-antigen building blocks biosynthesis	PWY-7328: superpathway of UDP-glucose-derived O-antigen building blocks biosynthesis	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+PWY-7332: superpathway of UDP-N-acetylglucosamine-derived O-antigen building blocks biosynthesis	PWY-7332: superpathway of UDP-N-acetylglucosamine-derived O-antigen building blocks biosynthesis	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY0-1261: anhydromuropeptides recycling I	PWY0-1261: anhydromuropeptides recycling I	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY0-1297: superpathway of purine deoxyribonucleosides degradation	PWY0-1297: superpathway of purine deoxyribonucleosides degradation	variable		r:d>1	RNA=0, DNA>0	DNA exists	c
+PWY0-1298: superpathway of pyrimidine deoxyribonucleosides degradation	PWY0-1298: superpathway of pyrimidine deoxyribonucleosides degradation	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY0-1479: tRNA processing	PWY0-1479: tRNA processing	variable		r:d<1	RNA=0, DNA>0	DNA exists	c
+PWY66-409: superpathway of purine nucleotide salvage	PWY66-409: superpathway of purine nucleotide salvage	variable		r:d<1	RNA=0, DNA>0	0.3-0.8 no DNA	c
+DENOVOPURINE2-PWY: superpathway of purine nucleotides de novo biosynthesis II	DENOVOPURINE2-PWY: superpathway of purine nucleotides de novo biosynthesis II	variable		r:d<1	else	0.3-0.8 no DNA	d
+FERMENTATION-PWY: mixed acid fermentation	FERMENTATION-PWY: mixed acid fermentation	variable		r:d<1	else	0.3-0.8 no DNA	d
+FOLSYN-PWY: superpathway of tetrahydrofolate biosynthesis and salvage	FOLSYN-PWY: superpathway of tetrahydrofolate biosynthesis and salvage	variable		r:d<1	else	0.3-0.8 no DNA	d
+GLUCARDEG-PWY: D-glucarate degradation I	GLUCARDEG-PWY: D-glucarate degradation I	variable		r:d<1	else	0.3-0.8 no DNA	d
+KETOGLUCONMET-PWY: ketogluconate metabolism	KETOGLUCONMET-PWY: ketogluconate metabolism	variable		r:d<1	else	0.3-0.8 no DNA	d
+METH-ACETATE-PWY: methanogenesis from acetate	METH-ACETATE-PWY: methanogenesis from acetate	variable		r:d>1	else	0.3-0.8 no DNA	d
+P124-PWY: Bifidobacterium shunt	P124-PWY: Bifidobacterium shunt	variable		r:d<1	else	0.3-0.8 no DNA	d
+P161-PWY: acetylene degradation (anaerobic)	P161-PWY: acetylene degradation (anaerobic)	variable		r:d<1	else	0.3-0.8 no DNA	d
+P185-PWY: formaldehyde assimilation III (dihydroxyacetone cycle)	P185-PWY: formaldehyde assimilation III (dihydroxyacetone cycle)	variable		r:d>1	else	0.3-0.8 no DNA	d
+P23-PWY: reductive TCA cycle I	P23-PWY: reductive TCA cycle I	variable		r:d<1	else	0.3-0.8 no DNA	d
+P4-PWY: superpathway of L-lysine, L-threonine and L-methionine biosynthesis I	P4-PWY: superpathway of L-lysine, L-threonine and L-methionine biosynthesis I	variable		r:d<1	else	0.3-0.8 no DNA	d
+PRPP-PWY: superpathway of histidine, purine, and pyrimidine biosynthesis	PRPP-PWY: superpathway of histidine, purine, and pyrimidine biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-1861: formaldehyde assimilation II (assimilatory RuMP Cycle)	PWY-1861: formaldehyde assimilation II (assimilatory RuMP Cycle)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-241: C4 photosynthetic carbon assimilation cycle, NADP-ME type	PWY-241: C4 photosynthetic carbon assimilation cycle, NADP-ME type	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5173	PWY-5173	variable		r:d>1	else	0.3-0.8 no DNA	d
+PWY-5189: tetrapyrrole biosynthesis II (from glycine)	PWY-5189: tetrapyrrole biosynthesis II (from glycine)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5367: petroselinate biosynthesis	PWY-5367: petroselinate biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5497: purine nucleobases degradation II (anaerobic)	PWY-5497: purine nucleobases degradation II (anaerobic)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5677: succinate fermentation to butanoate	PWY-5677: succinate fermentation to butanoate	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5723: Rubisco shunt	PWY-5723: Rubisco shunt	variable		r:d>1	else	0.3-0.8 no DNA	d
+PWY-5840: superpathway of menaquinol-7 biosynthesis	PWY-5840: superpathway of menaquinol-7 biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5845: superpathway of menaquinol-9 biosynthesis	PWY-5845: superpathway of menaquinol-9 biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5862: superpathway of demethylmenaquinol-9 biosynthesis	PWY-5862: superpathway of demethylmenaquinol-9 biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5913: partial TCA cycle (obligate autotrophs)	PWY-5913: partial TCA cycle (obligate autotrophs)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5918: superpathway of heme b biosynthesis from glutamate	PWY-5918: superpathway of heme b biosynthesis from glutamate	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5971: palmitate biosynthesis (type II fatty acid synthase)	PWY-5971: palmitate biosynthesis (type II fatty acid synthase)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6143: CMP-pseudaminate biosynthesis	PWY-6143: CMP-pseudaminate biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6145: superpathway of CMP-sialic acids biosynthesis	PWY-6145: superpathway of CMP-sialic acids biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-622: starch biosynthesis	PWY-622: starch biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6263: superpathway of menaquinol-8 biosynthesis II	PWY-6263: superpathway of menaquinol-8 biosynthesis II	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6284: superpathway of unsaturated fatty acids biosynthesis (E. coli)	PWY-6284: superpathway of unsaturated fatty acids biosynthesis (E. coli)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6478: GDP-D-glycero-&alpha;-D-manno-heptose biosynthesis	PWY-6478: GDP-D-glycero-&alpha;-D-manno-heptose biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6588: pyruvate fermentation to acetone	PWY-6588: pyruvate fermentation to acetone	variable		r:d>1	else	0.3-0.8 no DNA	d
+PWY-6595: superpathway of guanosine nucleotides degradation (plants)	PWY-6595: superpathway of guanosine nucleotides degradation (plants)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6612: superpathway of tetrahydrofolate biosynthesis	PWY-6612: superpathway of tetrahydrofolate biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6749: CMP-legionaminate biosynthesis I	PWY-6749: CMP-legionaminate biosynthesis I	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6803: phosphatidylcholine acyl editing	PWY-6803: phosphatidylcholine acyl editing	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-6892: thiazole component of thiamine diphosphate biosynthesis I	PWY-6892: thiazole component of thiamine diphosphate biosynthesis I	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-7013: (S)-propane-1,2-diol degradation	PWY-7013: (S)-propane-1,2-diol degradation	variable		r:d>1	else	0.3-0.8 no DNA	d
+PWY-7117: C4 photosynthetic carbon assimilation cycle, PEPCK type	PWY-7117: C4 photosynthetic carbon assimilation cycle, PEPCK type	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-7187: pyrimidine deoxyribonucleotides de novo biosynthesis II	PWY-7187: pyrimidine deoxyribonucleotides de novo biosynthesis II	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-7237: myo-, chiro- and scyllo-inositol degradation	PWY-7237: myo-, chiro- and scyllo-inositol degradation	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-7254: TCA cycle VII (acetate-producers)	PWY-7254: TCA cycle VII (acetate-producers)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-7312: dTDP-&beta;-D-fucofuranose biosynthesis	PWY-7312: dTDP-&beta;-D-fucofuranose biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-7316: dTDP-N-acetylviosamine biosynthesis	PWY-7316: dTDP-N-acetylviosamine biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-7371: 1,4-dihydroxy-6-naphthoate biosynthesis II	PWY-7371: 1,4-dihydroxy-6-naphthoate biosynthesis II	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-7384: anaerobic energy metabolism (invertebrates, mitochondrial)	PWY-7384: anaerobic energy metabolism (invertebrates, mitochondrial)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-7389: superpathway of anaerobic energy metabolism (invertebrates)	PWY-7389: superpathway of anaerobic energy metabolism (invertebrates)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY0-1415: superpathway of heme b biosynthesis from uroporphyrinogen-III	PWY0-1415: superpathway of heme b biosynthesis from uroporphyrinogen-III	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY0-166: superpathway of pyrimidine deoxyribonucleotides de novo biosynthesis (E. coli)	PWY0-166: superpathway of pyrimidine deoxyribonucleotides de novo biosynthesis (E. coli)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY0-781: aspartate superpathway	PWY0-781: aspartate superpathway	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY4LZ-257: superpathway of fermentation (Chlamydomonas reinhardtii)	PWY4LZ-257: superpathway of fermentation (Chlamydomonas reinhardtii)	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY66-389: phytol degradation	PWY66-389: phytol degradation	variable		r:d>1	else	0.3-0.8 no DNA	d
+PYRIDNUCSAL-PWY: NAD salvage pathway I (PNC VI cycle)	PYRIDNUCSAL-PWY: NAD salvage pathway I (PNC VI cycle)	variable		r:d<1	else	0.3-0.8 no DNA	d
+SO4ASSIM-PWY: assimilatory sulfate reduction I	SO4ASSIM-PWY: assimilatory sulfate reduction I	variable		r:d<1	else	0.3-0.8 no DNA	d
+SULFATE-CYS-PWY: superpathway of sulfate assimilation and cysteine biosynthesis	SULFATE-CYS-PWY: superpathway of sulfate assimilation and cysteine biosynthesis	variable		r:d<1	else	0.3-0.8 no DNA	d
+THISYN-PWY: superpathway of thiamine diphosphate biosynthesis I	THISYN-PWY: superpathway of thiamine diphosphate biosynthesis I	variable		r:d<1	else	0.3-0.8 no DNA	d
+PWY-5154: L-arginine biosynthesis III (via N-acetyl-L-citrulline)	PWY-5154: L-arginine biosynthesis III (via N-acetyl-L-citrulline)	variable		r:d<1	else	DNA exists	e
+ARO-PWY: chorismate biosynthesis I	ARO-PWY: chorismate biosynthesis I	variable		r:d<1	else	DNA exists	e
+THISYNARA-PWY: superpathway of thiamine diphosphate biosynthesis III (eukaryotes)	THISYNARA-PWY: superpathway of thiamine diphosphate biosynthesis III (eukaryotes)	variable		r:d<1	else	DNA exists	e
+PWY-724: superpathway of L-lysine, L-threonine and L-methionine biosynthesis II	PWY-724: superpathway of L-lysine, L-threonine and L-methionine biosynthesis II	variable		r:d<1	else	DNA exists	e
+PWY-6897: thiamine diphosphate salvage II	PWY-6897: thiamine diphosphate salvage II	variable		r:d<1	else	DNA exists	e
+PWY-7400: L-arginine biosynthesis IV (archaebacteria)	PWY-7400: L-arginine biosynthesis IV (archaebacteria)	variable		r:d<1	else	DNA exists	e
+ARGSYN-PWY: L-arginine biosynthesis I (via L-ornithine)	ARGSYN-PWY: L-arginine biosynthesis I (via L-ornithine)	variable		r:d<1	else	DNA exists	e
+PWY-7357: thiamine phosphate formation from pyrithiamine and oxythiamine (yeast)	PWY-7357: thiamine phosphate formation from pyrithiamine and oxythiamine (yeast)	variable		r:d<1	else	DNA exists	e
+COBALSYN-PWY: superpathway of adenosylcobalamin salvage from cobinamide I	COBALSYN-PWY: superpathway of adenosylcobalamin salvage from cobinamide I	variable		r:d<1	else	DNA exists	e
+GLUTORN-PWY: L-ornithine biosynthesis I	GLUTORN-PWY: L-ornithine biosynthesis I	variable		r:d<1	else	DNA exists	e
+PWY-7282: 4-amino-2-methyl-5-diphosphomethylpyrimidine biosynthesis II	PWY-7282: 4-amino-2-methyl-5-diphosphomethylpyrimidine biosynthesis II	variable		r:d<1	else	DNA exists	e
+PWY-2941: L-lysine biosynthesis II	PWY-2941: L-lysine biosynthesis II	variable		r:d<1	else	DNA exists	e
+POLYISOPRENSYN-PWY: polyisoprenoid biosynthesis (E. coli)	POLYISOPRENSYN-PWY: polyisoprenoid biosynthesis (E. coli)	variable		r:d<1	else	DNA exists	e
+HSERMETANA-PWY: L-methionine biosynthesis III	HSERMETANA-PWY: L-methionine biosynthesis III	variable		r:d<1	else	DNA exists	e
+PWY0-845: superpathway of pyridoxal 5'-phosphate biosynthesis and salvage	PWY0-845: superpathway of pyridoxal 5'-phosphate biosynthesis and salvage	variable		r:d<1	else	DNA exists	e
+PWY-6317: D-galactose degradation I (Leloir pathway)	PWY-6317: D-galactose degradation I (Leloir pathway)	variable		r:d<1	else	DNA exists	e
+PWY-6305: superpathway of putrescine biosynthesis	PWY-6305: superpathway of putrescine biosynthesis	variable		r:d<1	else	DNA exists	e
+PWY-6270: isoprene biosynthesis I	PWY-6270: isoprene biosynthesis I	variable		r:d<1	else	DNA exists	e
+PWY-7560: methylerythritol phosphate pathway II	PWY-7560: methylerythritol phosphate pathway II	variable		r:d<1	else	DNA exists	e
+GALACT-GLUCUROCAT-PWY: superpathway of hexuronide and hexuronate degradation	GALACT-GLUCUROCAT-PWY: superpathway of hexuronide and hexuronate degradation	variable		r:d<1	else	DNA exists	e
+PWY-7456: &beta;-(1,4)-mannan degradation	PWY-7456: &beta;-(1,4)-mannan degradation	variable		r:d<1	else	DNA exists	e
+PWY-5100: pyruvate fermentation to acetate and lactate II	PWY-5100: pyruvate fermentation to acetate and lactate II	variable		r:d>1	else	DNA exists	e
+PYRIDOXSYN-PWY: pyridoxal 5'-phosphate biosynthesis I	PYRIDOXSYN-PWY: pyridoxal 5'-phosphate biosynthesis I	variable		r:d>1	else	DNA exists	e
+PWY0-162: superpathway of pyrimidine ribonucleotides de novo biosynthesis	PWY0-162: superpathway of pyrimidine ribonucleotides de novo biosynthesis	variable		r:d>1	else	DNA exists	e
+GLUCUROCAT-PWY: superpathway of &beta;-D-glucuronosides degradation	GLUCUROCAT-PWY: superpathway of &beta;-D-glucuronosides degradation	variable		r:d>1	else	DNA exists	e
+PWY-7323: superpathway of GDP-mannose-derived O-antigen building blocks biosynthesis	PWY-7323: superpathway of GDP-mannose-derived O-antigen building blocks biosynthesis	variable		r:d>1	else	DNA exists	e
+PENTOSE-P-PWY: pentose phosphate pathway	PENTOSE-P-PWY: pentose phosphate pathway	variable		r:d>1	else	DNA exists	e
+GALACTUROCAT-PWY: D-galacturonate degradation I	GALACTUROCAT-PWY: D-galacturonate degradation I	variable		r:d>1	else	DNA exists	e
+PWY-6507: 4-deoxy-L-threo-hex-4-enopyranuronate degradation	PWY-6507: 4-deoxy-L-threo-hex-4-enopyranuronate degradation	variable		r:d>1	else	DNA exists	e
+PWY-4981: L-proline biosynthesis II (from arginine)	PWY-4981: L-proline biosynthesis II (from arginine)	variable		r:d>1	else	DNA exists	e
+NAGLIPASYN-PWY: lipid IVA biosynthesis (E. coli)	NAGLIPASYN-PWY: lipid IVA biosynthesis (E. coli)	variable		r:d>1	else	DNA exists	e
+P108-PWY: pyruvate fermentation to propanoate I	P108-PWY: pyruvate fermentation to propanoate I	variable		r:d>1	else	DNA exists	e
+P164-PWY: purine nucleobases degradation I (anaerobic)	P164-PWY: purine nucleobases degradation I (anaerobic)	variable		r:d>1	else	DNA exists	e
+PWY-4984: urea cycle	PWY-4984: urea cycle	variable		r:d<1	else	DNA exists	e
+PWY-5121: superpathway of geranylgeranyl diphosphate biosynthesis II (via MEP)	PWY-5121: superpathway of geranylgeranyl diphosphate biosynthesis II (via MEP)	variable		r:d<1	else	DNA exists	e
+PWY-5676: acetyl-CoA fermentation to butanoate II	PWY-5676: acetyl-CoA fermentation to butanoate II	variable		r:d>1	else	DNA exists	e
+PWY-5690: TCA cycle II (plants and fungi)	PWY-5690: TCA cycle II (plants and fungi)	variable		r:d>1	else	DNA exists	e
+PWY-6859: all-trans-farnesol biosynthesis	PWY-6859: all-trans-farnesol biosynthesis	variable		r:d<1	else	DNA exists	e
+PWY-7234: inosine-5'-phosphate biosynthesis III	PWY-7234: inosine-5'-phosphate biosynthesis III	variable		r:d>1	else	DNA exists	e
+PWY-7383: anaerobic energy metabolism (invertebrates, cytosol)	PWY-7383: anaerobic energy metabolism (invertebrates, cytosol)	variable		r:d>1	else	DNA exists	e
+PWY-7392: taxadiene biosynthesis (engineered)	PWY-7392: taxadiene biosynthesis (engineered)	variable		r:d<1	else	DNA exists	e
+PWY3O-355: stearate biosynthesis III (fungi)	PWY3O-355: stearate biosynthesis III (fungi)	variable		r:d<1	else	DNA exists	e
+PWY66-399: gluconeogenesis III	PWY66-399: gluconeogenesis III	variable		r:d>1	else	DNA exists	e
+TCA: TCA cycle I (prokaryotic)	TCA: TCA cycle I (prokaryotic)	variable		r:d>1	else	DNA exists	e
+3-HYDROXYPHENYLACETATE-DEGRADATION-PWY: 4-hydroxyphenylacetate degradation	3-HYDROXYPHENYLACETATE-DEGRADATION-PWY: 4-hydroxyphenylacetate degradation	variable		r:d<1	else	>0.8 no DNA	f
+7ALPHADEHYDROX-PWY	7ALPHADEHYDROX-PWY	variable		nan	else	>0.8 no DNA	f
+AEROBACTINSYN-PWY: aerobactin biosynthesis	AEROBACTINSYN-PWY: aerobactin biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+ALLANTOINDEG-PWY: superpathway of allantoin degradation in yeast	ALLANTOINDEG-PWY: superpathway of allantoin degradation in yeast	variable		r:d<1	else	>0.8 no DNA	f
+ARGDEG-PWY: superpathway of L-arginine, putrescine, and 4-aminobutanoate degradation	ARGDEG-PWY: superpathway of L-arginine, putrescine, and 4-aminobutanoate degradation	variable		r:d<1	else	>0.8 no DNA	f
+ARGORNPROST-PWY	ARGORNPROST-PWY	variable		r:d<1	else	>0.8 no DNA	f
+AST-PWY: L-arginine degradation II (AST pathway)	AST-PWY: L-arginine degradation II (AST pathway)	variable		r:d<1	else	>0.8 no DNA	f
+CATECHOL-ORTHO-CLEAVAGE-PWY: catechol degradation to &beta;-ketoadipate	CATECHOL-ORTHO-CLEAVAGE-PWY: catechol degradation to &beta;-ketoadipate	variable		r:d<1	else	>0.8 no DNA	f
+DENITRIFICATION-PWY: nitrate reduction I (denitrification)	DENITRIFICATION-PWY: nitrate reduction I (denitrification)	variable		r:d<1	else	>0.8 no DNA	f
+ECASYN-PWY: enterobacterial common antigen biosynthesis	ECASYN-PWY: enterobacterial common antigen biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+FAO-PWY: fatty acid &beta;-oxidation I (generic)	FAO-PWY: fatty acid &beta;-oxidation I (generic)	variable		r:d<1	else	>0.8 no DNA	f
+GLYCOL-GLYOXDEG-PWY: superpathway of glycol metabolism and degradation	GLYCOL-GLYOXDEG-PWY: superpathway of glycol metabolism and degradation	variable		r:d>1	else	>0.8 no DNA	f
+GLYCOLYSIS-TCA-GLYOX-BYPASS: superpathway of glycolysis, pyruvate dehydrogenase, TCA, and glyoxylate bypass	GLYCOLYSIS-TCA-GLYOX-BYPASS: superpathway of glycolysis, pyruvate dehydrogenase, TCA, and glyoxylate bypass	variable		r:d>1	else	>0.8 no DNA	f
+GLYOXYLATE-BYPASS: glyoxylate cycle	GLYOXYLATE-BYPASS: glyoxylate cycle	variable		r:d>1	else	>0.8 no DNA	f
+HCAMHPDEG-PWY: 3-phenylpropanoate and 3-(3-hydroxyphenyl)propanoate degradation to 2-hydroxypentadienoate	HCAMHPDEG-PWY: 3-phenylpropanoate and 3-(3-hydroxyphenyl)propanoate degradation to 2-hydroxypentadienoate	variable		r:d>1	else	>0.8 no DNA	f
+KDO-NAGLIPASYN-PWY: superpathway of (Kdo)2-lipid A biosynthesis	KDO-NAGLIPASYN-PWY: superpathway of (Kdo)2-lipid A biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+LIPASYN-PWY: phospholipases	LIPASYN-PWY: phospholipases	variable		r:d<1	else	>0.8 no DNA	f
+LPSSYN-PWY: superpathway of lipopolysaccharide biosynthesis	LPSSYN-PWY: superpathway of lipopolysaccharide biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+ORNARGDEG-PWY: superpathway of L-arginine and L-ornithine degradation	ORNARGDEG-PWY: superpathway of L-arginine and L-ornithine degradation	variable		r:d<1	else	>0.8 no DNA	f
+ORNDEG-PWY: superpathway of ornithine degradation	ORNDEG-PWY: superpathway of ornithine degradation	variable		r:d<1	else	>0.8 no DNA	f
+P105-PWY: TCA cycle IV (2-oxoglutarate decarboxylase)	P105-PWY: TCA cycle IV (2-oxoglutarate decarboxylase)	variable		r:d>1	else	>0.8 no DNA	f
+P122-PWY: heterolactic fermentation	P122-PWY: heterolactic fermentation	variable		r:d<1	else	>0.8 no DNA	f
+P125-PWY: superpathway of (R,R)-butanediol biosynthesis	P125-PWY: superpathway of (R,R)-butanediol biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+P163-PWY: L-lysine fermentation to acetate and butanoate	P163-PWY: L-lysine fermentation to acetate and butanoate	variable		r:d>1	else	>0.8 no DNA	f
+P165-PWY: superpathway of purines degradation in plants	P165-PWY: superpathway of purines degradation in plants	variable		r:d<1	else	>0.8 no DNA	f
+P221-PWY: octane oxidation	P221-PWY: octane oxidation	variable		r:d<1	else	>0.8 no DNA	f
+P621-PWY: nylon-6 oligomer degradation	P621-PWY: nylon-6 oligomer degradation	variable		r:d<1	else	>0.8 no DNA	f
+PROPFERM-PWY: superpathway of L-alanine fermentation (Stickland reaction)	PROPFERM-PWY: superpathway of L-alanine fermentation (Stickland reaction)	variable		r:d<1	else	>0.8 no DNA	f
+PROTOCATECHUATE-ORTHO-CLEAVAGE-PWY: protocatechuate degradation II (ortho-cleavage pathway)	PROTOCATECHUATE-ORTHO-CLEAVAGE-PWY: protocatechuate degradation II (ortho-cleavage pathway)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-1541: superpathway of taurine degradation	PWY-1541: superpathway of taurine degradation	variable		r:d<1	else	>0.8 no DNA	f
+PWY-2201: folate transformations I	PWY-2201: folate transformations I	variable		nan	else	>0.8 no DNA	f
+PWY-3781: aerobic respiration I (cytochrome c)	PWY-3781: aerobic respiration I (cytochrome c)	variable		nan	else	>0.8 no DNA	f
+PWY-4321: L-glutamate degradation IV	PWY-4321: L-glutamate degradation IV	variable		r:d<1	else	>0.8 no DNA	f
+PWY-4702: phytate degradation I	PWY-4702: phytate degradation I	variable		r:d<1	else	>0.8 no DNA	f
+PWY-4722: creatinine degradation II	PWY-4722: creatinine degradation II	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5028: L-histidine degradation II	PWY-5028: L-histidine degradation II	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5083: NAD(P)/NADPH interconversion	PWY-5083: NAD(P)/NADPH interconversion	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5088: L-glutamate degradation VIII (to propanoate)	PWY-5088: L-glutamate degradation VIII (to propanoate)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5101: L-isoleucine biosynthesis II	PWY-5101: L-isoleucine biosynthesis II	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5181: toluene degradation III (aerobic) (via p-cresol)	PWY-5181: toluene degradation III (aerobic) (via p-cresol)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5265: peptidoglycan biosynthesis II (staphylococci)	PWY-5265: peptidoglycan biosynthesis II (staphylococci)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5392: reductive TCA cycle II	PWY-5392: reductive TCA cycle II	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5417: catechol degradation III (ortho-cleavage pathway)	PWY-5417: catechol degradation III (ortho-cleavage pathway)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5431: aromatic compounds degradation via &beta;-ketoadipate	PWY-5431: aromatic compounds degradation via &beta;-ketoadipate	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5464: superpathway of cytosolic glycolysis (plants), pyruvate dehydrogenase and TCA cycle	PWY-5464: superpathway of cytosolic glycolysis (plants), pyruvate dehydrogenase and TCA cycle	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5647: 2-nitrobenzoate degradation I	PWY-5647: 2-nitrobenzoate degradation I	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5654: 2-amino-3-carboxymuconate semialdehyde degradation to 2-hydroxypentadienoate	PWY-5654: 2-amino-3-carboxymuconate semialdehyde degradation to 2-hydroxypentadienoate	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5656: mannosylglycerate biosynthesis I	PWY-5656: mannosylglycerate biosynthesis I	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5675: nitrate reduction V (assimilatory)	PWY-5675: nitrate reduction V (assimilatory)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5692: allantoin degradation to glyoxylate II	PWY-5692: allantoin degradation to glyoxylate II	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5705: allantoin degradation to glyoxylate III	PWY-5705: allantoin degradation to glyoxylate III	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5724: superpathway of atrazine degradation	PWY-5724: superpathway of atrazine degradation	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5747: 2-methylcitrate cycle II	PWY-5747: 2-methylcitrate cycle II	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5791	PWY-5791	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5850: superpathway of menaquinol-6 biosynthesis	PWY-5850: superpathway of menaquinol-6 biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5855: ubiquinol-7 biosynthesis (early decarboxylation)	PWY-5855: ubiquinol-7 biosynthesis (early decarboxylation)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5856: ubiquinol-9 biosynthesis (early decarboxylation)	PWY-5856: ubiquinol-9 biosynthesis (early decarboxylation)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5857: ubiquinol-10 biosynthesis (early decarboxylation)	PWY-5857: ubiquinol-10 biosynthesis (early decarboxylation)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5860: superpathway of demethylmenaquinol-6 biosynthesis I	PWY-5860: superpathway of demethylmenaquinol-6 biosynthesis I	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5863: superpathway of phylloquinol biosynthesis	PWY-5863: superpathway of phylloquinol biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5896: superpathway of menaquinol-10 biosynthesis	PWY-5896: superpathway of menaquinol-10 biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5920: superpathway of heme b biosynthesis from glycine	PWY-5920: superpathway of heme b biosynthesis from glycine	variable		r:d<1	else	>0.8 no DNA	f
+PWY-5941: glycogen degradation II	PWY-5941: glycogen degradation II	variable		nan	else	>0.8 no DNA	f
+PWY-5994: palmitate biosynthesis (type I fatty acid synthase)	PWY-5994: palmitate biosynthesis (type I fatty acid synthase)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6167: flavin biosynthesis II (archaea)	PWY-6167: flavin biosynthesis II (archaea)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6182: superpathway of salicylate degradation	PWY-6182: superpathway of salicylate degradation	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6185: 4-methylcatechol degradation (ortho cleavage)	PWY-6185: 4-methylcatechol degradation (ortho cleavage)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6210: 2-aminophenol degradation	PWY-6210: 2-aminophenol degradation	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6215: 4-chlorobenzoate degradation	PWY-6215: 4-chlorobenzoate degradation	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6285: superpathway of fatty acids biosynthesis (E. coli)	PWY-6285: superpathway of fatty acids biosynthesis (E. coli)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6307: L-tryptophan degradation X (mammalian, via tryptamine)	PWY-6307: L-tryptophan degradation X (mammalian, via tryptamine)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6313: serotonin degradation	PWY-6313: serotonin degradation	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6318: L-phenylalanine degradation IV (mammalian, via side chain)	PWY-6318: L-phenylalanine degradation IV (mammalian, via side chain)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6349: CDP-archaeol biosynthesis	PWY-6349: CDP-archaeol biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6467: Kdo transfer to lipid IVA III (Chlamydia)	PWY-6467: Kdo transfer to lipid IVA III (Chlamydia)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6562: norspermidine biosynthesis	PWY-6562: norspermidine biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6630: superpathway of L-tyrosine biosynthesis	PWY-6630: superpathway of L-tyrosine biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6660: 2-heptyl-3-hydroxy-4(1H)-quinolone biosynthesis	PWY-6660: 2-heptyl-3-hydroxy-4(1H)-quinolone biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6690: cinnamate and 3-hydroxycinnamate degradation to 2-hydroxypentadienoate	PWY-6690: cinnamate and 3-hydroxycinnamate degradation to 2-hydroxypentadienoate	variable		r:d>1	else	>0.8 no DNA	f
+PWY-6708: ubiquinol-8 biosynthesis (early decarboxylation)	PWY-6708: ubiquinol-8 biosynthesis (early decarboxylation)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6748: nitrate reduction VII (denitrification)	PWY-6748: nitrate reduction VII (denitrification)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6823: molybdopterin biosynthesis	PWY-6823: molybdopterin biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6876: isopropanol biosynthesis (engineered)	PWY-6876: isopropanol biosynthesis (engineered)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-6953: dTDP-3-acetamido-&alpha;-D-fucose biosynthesis	PWY-6953: dTDP-3-acetamido-&alpha;-D-fucose biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7003: glycerol degradation to butanol	PWY-7003: glycerol degradation to butanol	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7031: protein N-glycosylation (bacterial)	PWY-7031: protein N-glycosylation (bacterial)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7039: phosphatidate metabolism, as a signaling molecule	PWY-7039: phosphatidate metabolism, as a signaling molecule	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7094: fatty acid salvage	PWY-7094: fatty acid salvage	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7118: chitin deacetylation	PWY-7118: chitin deacetylation	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7165: L-ascorbate biosynthesis VIII (engineered pathway)	PWY-7165: L-ascorbate biosynthesis VIII (engineered pathway)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7196: superpathway of pyrimidine ribonucleosides salvage	PWY-7196: superpathway of pyrimidine ribonucleosides salvage	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7200: superpathway of pyrimidine deoxyribonucleoside salvage	PWY-7200: superpathway of pyrimidine deoxyribonucleoside salvage	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7204: pyridoxal 5'-phosphate salvage II (plants)	PWY-7204: pyridoxal 5'-phosphate salvage II (plants)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7209: superpathway of pyrimidine ribonucleosides degradation	PWY-7209: superpathway of pyrimidine ribonucleosides degradation	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7245: superpathway of NAD/NADP - NADH/NADPH interconversion (yeast)	PWY-7245: superpathway of NAD/NADP - NADH/NADPH interconversion (yeast)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7268: cytosolic NADPH production (yeast)	PWY-7268: cytosolic NADPH production (yeast)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7269: mitochondrial NADPH production (yeast)	PWY-7269: mitochondrial NADPH production (yeast)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7279: aerobic respiration II (cytochrome c) (yeast)	PWY-7279: aerobic respiration II (cytochrome c) (yeast)	variable		nan	else	>0.8 no DNA	f
+PWY-7294: D-xylose degradation IV	PWY-7294: D-xylose degradation IV	variable		nan	else	>0.8 no DNA	f
+PWY-7385: 1,3-propanediol biosynthesis (engineered)	PWY-7385: 1,3-propanediol biosynthesis (engineered)	variable		r:d>1	else	>0.8 no DNA	f
+PWY-7409: phospholipid remodeling (phosphatidylethanolamine, yeast)	PWY-7409: phospholipid remodeling (phosphatidylethanolamine, yeast)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7431: aromatic biogenic amine degradation (bacteria)	PWY-7431: aromatic biogenic amine degradation (bacteria)	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7446: sulfoquinovose degradation I	PWY-7446: sulfoquinovose degradation I	variable		r:d<1	else	>0.8 no DNA	f
+PWY-7616: methanol oxidation to carbon dioxide	PWY-7616: methanol oxidation to carbon dioxide	variable		r:d<1	else	>0.8 no DNA	f
+PWY-821: superpathway of sulfur amino acid biosynthesis (Saccharomyces cerevisiae)	PWY-821: superpathway of sulfur amino acid biosynthesis (Saccharomyces cerevisiae)	variable		r:d<1	else	>0.8 no DNA	f
+PWY0-1061: superpathway of L-alanine biosynthesis	PWY0-1061: superpathway of L-alanine biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
+PWY0-1277: 3-phenylpropanoate and 3-(3-hydroxyphenyl)propanoate degradation	PWY0-1277: 3-phenylpropanoate and 3-(3-hydroxyphenyl)propanoate degradation	variable		r:d<1	else	>0.8 no DNA	f
+PWY0-1338: polymyxin resistance	PWY0-1338: polymyxin resistance	variable		r:d<1	else	>0.8 no DNA	f
+PWY0-1533: methylphosphonate degradation I	PWY0-1533: methylphosphonate degradation I	variable		r:d<1	else	>0.8 no DNA	f
+PWY0-41: allantoin degradation IV (anaerobic)	PWY0-41: allantoin degradation IV (anaerobic)	variable		r:d<1	else	>0.8 no DNA	f
+PWY0-42: 2-methylcitrate cycle I	PWY0-42: 2-methylcitrate cycle I	variable		r:d<1	else	>0.8 no DNA	f
+PWY0-881: superpathway of fatty acid biosynthesis I (E. coli)	PWY0-881: superpathway of fatty acid biosynthesis I (E. coli)	variable		r:d<1	else	>0.8 no DNA	f
+PWY1G-0: mycothiol biosynthesis	PWY1G-0: mycothiol biosynthesis	variable		nan	else	>0.8 no DNA	f
+PWY3DJ-35471: L-ascorbate biosynthesis IV (animals, D-glucuronate pathway)	PWY3DJ-35471: L-ascorbate biosynthesis IV (animals, D-glucuronate pathway)	variable		r:d<1	else	>0.8 no DNA	f
+PWY490-3: nitrate reduction VI (assimilatory)	PWY490-3: nitrate reduction VI (assimilatory)	variable		r:d<1	else	>0.8 no DNA	f
+PWY5F9-12: biphenyl degradation	PWY5F9-12: biphenyl degradation	variable		r:d<1	else	>0.8 no DNA	f
+PWY66-388: ceramide degradation by &alpha;-oxidation	PWY66-388: ceramide degradation by &alpha;-oxidation	variable		r:d<1	else	>0.8 no DNA	f
+PWY66-398: TCA cycle III (animals)	PWY66-398: TCA cycle III (animals)	variable		r:d<1	else	>0.8 no DNA	f
+REDCITCYC: TCA cycle VI (Helicobacter)	REDCITCYC: TCA cycle VI (Helicobacter)	variable		r:d<1	else	>0.8 no DNA	f
+RUMP-PWY: formaldehyde oxidation I	RUMP-PWY: formaldehyde oxidation I	variable		r:d<1	else	>0.8 no DNA	f
+TCA-GLYOX-BYPASS: superpathway of glyoxylate bypass and TCA	TCA-GLYOX-BYPASS: superpathway of glyoxylate bypass and TCA	variable		r:d>1	else	>0.8 no DNA	f
+THREOCAT-PWY: superpathway of L-threonine metabolism	THREOCAT-PWY: superpathway of L-threonine metabolism	variable		r:d<1	else	>0.8 no DNA	f
+TYRFUMCAT-PWY: L-tyrosine degradation I	TYRFUMCAT-PWY: L-tyrosine degradation I	variable		r:d<1	else	>0.8 no DNA	f
+UBISYN-PWY: superpathway of ubiquinol-8 biosynthesis (early decarboxylation)	UBISYN-PWY: superpathway of ubiquinol-8 biosynthesis (early decarboxylation)	variable		r:d<1	else	>0.8 no DNA	f
+URDEGR-PWY: superpathway of allantoin degradation in plants	URDEGR-PWY: superpathway of allantoin degradation in plants	variable		r:d<1	else	>0.8 no DNA	f
+URSIN-PWY: ureide biosynthesis	URSIN-PWY: ureide biosynthesis	variable		r:d<1	else	>0.8 no DNA	f
