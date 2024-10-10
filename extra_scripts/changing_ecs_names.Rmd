@@ -1,0 +1,128 @@
+---
+title: "changing_ecs_names"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+
+
+```{r }
+#path <-  '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/merged_with_pilot/ecs_filtered_1abund_in_1perc_outof10k.tsv'
+path <- '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/merged_with_pilot/ecs_flare_and_never_only_10kTSS.tsv'
+path
+```
+
+
+
+```{r pressure, echo=FALSE}
+df <- read.table(file = path, header = T, comment.char = '', quote="\"", sep='\t', check.names = F)
+df 
+```
+
+```{r}
+names(df)[names(df) == '# features'] <- 'features'
+names(df)[1]
+```
+
+```{r}
+ecs2names_path <- '/pita/users/hila/analysis/my scripts/ecs_to_name.txt'
+ecs2names_path
+```
+
+
+```{r}
+ecs2names_df <- read.table(file = ecs2names_path, header = T, comment.char = '', quote="\"", sep='\t', check.names = F)
+ecs2names_df 
+
+```
+
+```{r}
+ecs2names_df$duplicated_names <- ecs2names_df$Name %>% duplicated()
+ecs2names_df
+```
+```{r}
+# how many unique ecs Names there are.
+ecs2names_df$EC %>% unique() %>% length()
+```
+
+```{r}
+# Are all EC values unique? - yes they are.
+ecs2names_df[ecs2names_df$EC %>% duplicated(),]
+```
+
+```{r}
+# how many duplicated Names?
+ecs2names_df$duplicated_names[ecs2names_df$duplicated_names == TRUE] %>% length()
+```
+
+```{r}
+# which Names are duplicated?
+ecs2names_df[ecs2names_df$Name %>% duplicated(),] %>% select(Name) %>% unique()
+```
+
+
+```{r}
+ecs2names_df[ecs2names_df$Name %>% duplicated(),]
+
+```
+```{r}
+ecs2names_df
+```
+
+```{r}
+# make the Names of ecs unique. 
+make_unique_names <- function(ecs, name, is_duplicated) {
+  if(is_duplicated) {
+    if(grepl("Transferred entry", name, fixed = T)) {
+      str <- gsub("Transferred entry", "", name) %>% trimws() # e.g. getting from 'Transferred entry 7.1.1.6' only 7.1.1.6
+      new_name <- paste("Transferred", ecs, "to", str) 
+    } else {
+      new_name <- paste(ecs, name) # i.e. 'Deleted entry' -> '1.1.5.1 Deleted entry'
+    }
+  } else {
+    new_name <- paste(ecs, name)
+  }                                                                
+  return(new_name)
+}
+
+
+ecs2names_df$unique_names <- mapply(make_unique_names, ecs2names_df$EC, ecs2names_df$Name, ecs2names_df$duplicated_names)
+ecs2names_df
+```
+
+
+```{r}
+# Adding ecs2names to the left of df
+joined_df <- right_join(ecs2names_df, df, by = c('EC' = 'features'))
+joined_df
+```
+
+
+```{r}
+# removing redundant columns, leaving unique_names and the samples names.
+new_df <- joined_df %>% select(-c('EC', 'Name', 'duplicated_names'))
+new_df
+```
+
+
+```{r}
+# changing 'unique_names' column name
+names(new_df)[names(new_df) == 'unique_names'] <- 'features'
+names(new_df)[1]
+```
+
+
+```{r}
+#PATH.OUT <- '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/merged_with_pilot/ecs_filtered_1abund_in_1perc_outof10k_ecs2name.tsv'
+PATH.OUT <- '~/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/merged_with_pilot/ecs_flare_and_never_only_10kTSS_ecs2name.tsv'
+write.table(new_df, PATH.OUT, sep = "\t", row.names = F, quote = F, col.names = T)
+
+```
+
+
+
+
+

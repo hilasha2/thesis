@@ -1,0 +1,140 @@
+---
+title: "changing_abundance_tables_column_names"
+output: html_document
+---
+
+```{r setup}
+knitr::opts_chunk$set(echo = FALSE)
+list.of.packages <- c("tidyverse", "plotly")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+lapply(list.of.packages, require, character.only = TRUE)
+```
+
+```{r}
+library("tidyverse")
+```
+
+
+```{r paths}
+#PATHABUNDANCE <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab/pathabundance_relab_unstratified.tsv'
+
+#ECS <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab/ecs_relab_unstratified.tsv'
+
+#PATHABUNDANCE <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/pathabundance_relab_unstratified.tsv'
+
+#ECS <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ecs_relab_unstratified.tsv'
+
+#PATHABUNDANCE <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/pathabundance_relab_stratified.tsv'
+
+#ECS <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ecs_relab_stratified.tsv'
+
+GENEFAMILIES <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/genefamilies_relab_unstratified.tsv'
+
+#KO <-  '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ko_relab_unstratified.tsv'
+
+
+#METAPHLAN <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/metaphlan/merged_fixed_kneaddata_stage/metaphlan_species_profiles_fixed.tsv'
+
+```
+
+
+
+```{r}
+mpln <- read.delim(METAPHLAN, stringsAsFactors = F, check.names = F, sep = "\t")
+mpln
+```
+
+
+```{r}
+pwys <- read.delim(PATHABUNDANCE, stringsAsFactors = F, check.names = F, sep = "\t")
+pwys
+```
+
+
+```{r}
+ecs <- read.delim(ECS, stringsAsFactors = F, check.names = F, sep = "\t")
+ecs
+```
+
+```{r}
+gf <- read.delim(GENEFAMILIES, stringsAsFactors = F, check.names = F, sep = "\t")
+gf
+
+```
+
+
+```{r}
+colnames(mpln) <- strsplit(colnames(mpln), "_DKD") %>% sapply("[[", 1)
+colnames(mpln)
+```
+
+
+
+```{r}
+length(colnames(mpln))
+```
+
+
+```{r}
+colnames(pwys) <- strsplit(colnames(pwys), "_DKD") %>% sapply("[[", 1)
+colnames(pwys)
+```
+
+
+
+```{r}
+colnames(ecs) <- strsplit(colnames(ecs), "_DKD") %>% sapply("[[", 1)
+colnames(ecs)
+```
+
+```{r}
+colnames(gf) <- strsplit(colnames(gf), "_DKD") %>% sapply("[[", 1)
+colnames(gf)
+```
+
+
+```{r}
+ko <- read.delim(KO, stringsAsFactors = F, check.names = F, sep = "\t")
+ko
+
+```
+
+```{r}
+
+colnames(ko) <- strsplit(colnames(ko), "_DKD") %>% sapply("[[", 1)
+colnames(ko)
+
+```
+
+```{r}
+#PATHABUNDANCE_OUTPUT <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab/pathabundance_relab_unstratified_shorter_headers.tsv'
+#ECS_OUTPUT <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab/ecs_relab_unstratified_shorter_headers.tsv'
+#METAPHLAN_OUTPUT <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/metaphlan/merged_fixed_kneaddata_stage/metaphlan_species_profiles_fixed_shorter_headers.tsv'
+
+
+#PATHABUNDANCE_OUTPUT <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/pathabundance_relab_unstratified_shorter_headers.tsv'
+#ECS_OUTPUT <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ecs_relab_unstratified_shorter_headers.tsv'
+
+#PATHABUNDANCE_OUTPUT <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/pathabundance_relab_stratified_shorter_headers.tsv'
+#ECS_OUTPUT <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ecs_relab_stratified_shorter_headers.tsv'
+
+#KO_OUTPUT <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ko_relab_unstratified_shorter_headers.tsv'
+
+GENEFAMILIES_OUTPUT <- '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/genefamilies_relab_unstratified_shorter_headers.tsv'
+
+```
+
+
+
+```{r}
+#write.table(ko, KO_OUTPUT, sep = "\t", row.names = F, quote = F, fileEncoding = 'UTF-8')
+
+#write.table(pwys, PATHABUNDANCE_OUTPUT, sep = "\t", row.names = F, quote = F, fileEncoding = 'UTF-8')
+
+#write.table(ecs, ECS_OUTPUT, sep = "\t", row.names = F, quote = F, fileEncoding = 'UTF-8')
+
+write.table(gf, GENEFAMILIES_OUTPUT, sep = "\t", row.names = F, quote = F, fileEncoding = 'UTF-8')
+
+#write.table(mpln, METAPHLAN_OUTPUT, sep = "\t", row.names = F, quote = F, fileEncoding = 'UTF-8')
+```
