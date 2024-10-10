@@ -1,4 +1,4 @@
-**Aim 4: Develop and test new analytic methods for MGX: Investigating if the adjustment of feature abundance tables to taxa mitigates the over-representation of features originating from abundant species.**
+# **Aim 4: Develop and test new analytic methods for MGX: Investigating if the adjustment of feature abundance tables to taxa mitigates the over-representation of features originating from abundant species.**
 
 Notice: Missing all input gene families files as they are too big to upload.
 
