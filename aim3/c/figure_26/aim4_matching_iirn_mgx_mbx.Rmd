@@ -1,0 +1,358 @@
+---
+title: "matching_ko_mbx_mgx"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+```
+
+
+
+```{r paths}
+KO_RELAB = '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ko_relab_unstratified_samples_above_thres_filt_1e08of10k_in10perc.tsv'
+KO_COUNT ='/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ko_count_unstratified_samples_above_thres_filt_above050.tsv'
+ID_MATCH = '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/MultiOmics_IDs.csv'
+MBX = '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/Stool_Data_MZM10_N2_filtered_v2.csv'
+METADATA = '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/Stool_metadata.tsv'
+```
+
+
+
+```{r reading relab mgx table}
+mgx = read.table(file = KO_RELAB, header = T, row.names = 1, comment.char = '', quote="\"", sep='\t', check.names = F)
+mgx
+```
+
+
+```{r reading metabolomics table}
+
+mbx = read.table(file = MBX, header = T, row.names = 1, comment.char = '', quote="\"", sep=',', check.names = F)
+mbx
+```
+
+
+
+```{r reading mapping table}
+id.df = read.table(file = ID_MATCH, header = T, comment.char = '', quote="\"", sep=',')
+id.df
+
+```
+
+
+```{r getting relab mgx sample names}
+mgx.cols = colnames(mgx)
+mgx.cols
+```
+
+
+```{r filtering to desired samples}
+# getting only the samples which have an mgx sample from our mgx table AND mbx sample. 
+id.matched <- id.df %>% filter((MGX_ID %in% mgx.cols) & (Stool_include == 'Y'))
+id.matched
+```
+```{r}
+id.matched %>% nrow()
+
+```
+
+
+
+```{r filtering samples in mbx table}
+# filtering the mbx table to include only columns (samples) found in the id matching table after filtration.
+mbx.filt <- mbx %>% select(id.matched$Stool_Metabolomics_ID)
+mbx.filt
+```
+
+
+```{r new sample names}
+# returning the mgx ID matched to its mbx sample
+mbx2mgx <- function(name) {
+  idx <- match(name, id.matched$Stool_Metabolomics_ID)
+  return(id.matched$MGX_ID[idx])
+  }
+new.cols <- sapply(colnames(mbx.filt), mbx2mgx)
+new.cols
+```
+
+```{r filtered metabolomics table}
+colnames(mbx.filt) <- new.cols
+mbx.filt
+```
+
+
+```{r reading mbx metadata}
+# reading metadata file
+meta = read.table(file = METADATA, header = T, comment.char = '', quote="\"", sep='\t', check.names = F)
+meta
+```
+
+
+```{r filtered metadata}
+meta.filt <- meta %>% filter(SampleID %in% id.matched$Stool_Metabolomics_ID)
+meta.filt
+```
+
+
+
+```{r}
+# matching sample IDs of the metadata to those from mgx
+new.sample.ids <- sapply(meta.filt$SampleID, mbx2mgx)
+new.sample.ids
+
+```
+
+```{r adding MGX_ID col to meta}
+new.meta <- cbind(MGX_ID = new.sample.ids, meta.filt)
+new.meta
+```
+
+```{r writing updated mbx metadata table}
+META.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_metadata_22_Nov_2023_matched_mbx_mgx.tsv'
+write.table(new.meta, META.PATH, sep = "\t", row.names = F, quote = F, col.names = T)
+```
+
+
+```{r writing updated metabolomics table}
+MBX.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_mbx_22_Nov_2023.tsv'
+write.table(mbx.filt, MBX.PATH, sep = "\t", row.names = T, quote = F, col.names = T)
+```
+
+
+```{r filtering relab mgx samples}
+new.mgx <- mgx[,id.matched$MGX_ID]
+new.mgx
+```
+
+
+```{r}
+# checking whether the two sample names are equal in both tables
+setequal(colnames(new.mgx), colnames(mbx.filt))
+
+```
+
+```{r relab metadata path}
+
+KO_RELAB_META = '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ko_relab_unstratified_samples_above_thres_filt_1e08of10k_in10perc.csv_feature.txt'
+
+```
+
+
+```{r reading relab metadata}
+mgx.meta = read.table(file = KO_RELAB_META, header = T, row.names = 1, comment.char = '', quote="\"", sep='\t', check.names = F)
+mgx.meta
+```
+
+
+```{r}
+# merging metadata with relab table
+mgx.named <- merge(mgx.meta, new.mgx, by = 0)
+mgx.named
+
+```
+
+
+```{r}
+# Creating a relab table with feature names instead of KO numbers
+mgx.named2 <- mgx.named %>% select(-c(Row.names, level1, level2, level3, "_feature_id"))
+mgx.named2
+```
+
+```{r saving update relab path}
+RELAB.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_mgx_relab_22_Nov_2023.tsv'
+write.table(mgx.named2, RELAB.PATH, sep = "\t", row.names = F, quote = F, col.names = T)
+```
+
+```{r}
+mgx.named[mgx.named$level3 == "00010 Glycolysis / Gluconeogenesis [PATH:ko00010]",]$SH_119 %>% sum()
+```
+
+
+```{r relab aggregation}
+# aggregating (summing) by level3
+mgx.agg <- mgx.named %>% select(-c(Row.names, level1, level2, "_feature_id", name)) %>% group_by(level3) %>% summarise(across(everything(), sum),  .groups = 'drop') %>% as.data.frame()
+mgx.agg
+
+```
+
+```{r}
+mgx.agg$level3
+```
+
+
+```{r saving aggregated relab table}
+RELAB.AGG.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_mgx_relab_agg_22_Nov_2023.tsv'
+write.table(mgx.agg, RELAB.AGG.PATH, sep = "\t", row.names = F, quote = F, col.names = T)
+
+```
+###############################
+### Count
+
+```{r count}
+#KO_COUNT ='/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ko_count_unstratified_samples_above_thres_filt_above050.tsv'
+mgx.count = read.table(file = KO_COUNT, header = T, row.names = 1, comment.char = '', quote="\"", sep='\t', check.names = F)
+mgx.count
+
+```
+
+
+```{r}
+
+KO_COUNT_META = '/pita/users/hila/biobakery_workflows/output_data/01_Jan_2023_mgx_iirn/humann/relab_with_pilot/ko_count_unstratified_samples_above_thres_filt_above050.tsv_feature.txt'
+
+```
+
+
+```{r}
+mgx.count.meta = read.table(file = KO_COUNT_META, header = T, row.names = 1, comment.char = '', quote="\"", sep='\t', check.names = F)
+mgx.count.meta
+```
+
+```{r}
+new.mgx.count <- mgx.count[,id.matched$MGX_ID]
+new.mgx.count
+```
+
+```{r}
+mgx.count.merged <- merge(mgx.count.meta, new.mgx.count, by = 0)
+mgx.count.merged
+
+```
+
+
+```{r}
+mgx.count.named <- mgx.count.merged %>% select(-c(Row.names, level1, level2, level3, "_feature_id", ">0.05"))
+mgx.count.named
+```
+
+```{r}
+COUNT.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_mgx_count_22_Nov_2023.tsv'
+write.table(mgx.count.named, COUNT.PATH, sep = "\t", row.names = F, quote = F, col.names = T)
+```
+
+
+```{r}
+# aggregating (summing) by level3
+mgx.count.agg <- mgx.count.merged %>% select(-c(Row.names, level1, level2, "_feature_id", name, ">0.05")) %>% group_by(level3) %>% summarise(across(everything(), sum),  .groups = 'drop') %>% as.data.frame()
+mgx.count.agg
+
+```
+
+
+```{r writing count agg table}
+COUNT.AGG.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_mgx_count_agg_22_Nov_2023.tsv'
+write.table(mgx.count.agg, COUNT.AGG.PATH, sep = "\t", row.names = F, quote = F, col.names = T)
+
+```
+###########
+### filtering to signficant features
+
+```{r paths of signficant features}
+SIG.RELAB.AGG = '/pita/users/hila/analysis/datasets/aim4_IIRN_ko_relab_unstratified_first_samples_1e07of10k_in10perc_diff_CD_vs_ctl_in_lvl3.csv'
+SIG.COUNT.AGG = '/pita/users/hila/analysis/datasets/aim4_IIRN_ko_count_unstratified_first_samples_above050_diff_CD_vs_ctl_in_lvl3.csv'
+SIG.RELAB = '/pita/users/hila/analysis/datasets/aim4_IIRN_ko_relab_unstratified_first_samples_1e07of10k_in10perc_diff_CD_vs_ctl_ko_sig_in_lvl3_DA.csv'
+SIG.COUNT = '/pita/users/hila/analysis/datasets/aim4_IIRN_ko_count_unstratified_first_samples_above050_diff_CD_vs_ctl_ko_sig_in_lvl3_DA.csv'
+
+
+```
+
+
+```{r reading sig features relab agg table}
+sig.relab.agg = read.table(file = SIG.RELAB.AGG, header = T, row.names = 1, comment.char = '', quote="\"", sep=',', check.names = F)
+sig.relab.agg
+
+```
+```{r reading sig features count agg table}
+sig.count.agg = read.table(file = SIG.COUNT.AGG, header = T, row.names = 1, comment.char = '', quote="\"", sep=',', check.names = F)
+sig.count.agg
+
+```
+
+```{r reading sig features count table}
+sig.count = read.table(file = SIG.COUNT, header = T, row.names = 1, comment.char = '', quote="\"", sep='\t', check.names = F)
+sig.count
+
+```
+
+```{r reading sig features relab table}
+sig.relab = read.table(file = SIG.RELAB, header = T, row.names = 1, comment.char = '', quote="\"", sep='\t', check.names = F)
+sig.relab
+
+```
+
+
+```{r filter mgx relab to sig}
+mgx.sig.relab <- mgx.named2 %>% filter(name %in% sig.relab$name & name != "")
+mgx.sig.relab
+```
+
+```{r find duplicated features in relab}
+mgx.sig.relab$name[mgx.sig.relab %>% duplicated()]
+```
+
+
+
+```{r filter mgx count to sig}
+mgx.sig.count <- mgx.count.named %>% filter(name %in% sig.count$name & name != "") 
+mgx.sig.count
+```
+
+
+```{r}
+mgx.sig.count$name %>% unique() %>% length()
+```
+
+
+```{r}
+mgx.sig.count$name[mgx.sig.count$name %>% duplicated()]
+
+```
+
+```{r}
+mgx.agg 
+
+```
+
+
+```{r filter mgx count agg to sig}
+mgx.sig.cnt.agg <- mgx.count.agg %>% filter(level3 %in% sig.count.agg$level3 & level3 != "") 
+mgx.sig.cnt.agg
+```
+
+```{r filter mgx relab agg to sig}
+mgx.sig.rel.agg <- mgx.agg %>% filter(level3 %in% sig.relab.agg$level3 & level3 != "") 
+mgx.sig.rel.agg
+```
+```{r writing count agg with sig features table}
+COUNT.AGG.SIG.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_mgx_count_agg_sig_23_Nov_2023.tsv'
+write.table(mgx.sig.cnt.agg, COUNT.AGG.SIG.PATH, sep = "\t", row.names = F, quote = F, col.names = T)
+
+```
+
+
+```{r writing relab agg with sig features table}
+RELAB.AGG.SIG.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_mgx_relab_agg_sig_23_Nov_2023.tsv'
+write.table(mgx.sig.rel.agg, RELAB.AGG.SIG.PATH, sep = "\t", row.names = F, quote = F, col.names = T)
+
+```
+
+```{r writing count with sig features table}
+COUNT.SIG.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_mgx_count_sig_23_Nov_2023.tsv'
+write.table(mgx.sig.count, COUNT.SIG.PATH, sep = "\t", row.names = F, quote = F, col.names = T)
+
+```
+
+```{r writing relab with sig features table}
+RELAB.SIG.PATH <- '/pita/users/hila/biobakery_workflows/input/22_Jun_2023_metabolomics_IIRN/IIRN_mgx_relab_sig_23_Nov_2023.tsv'
+write.table(mgx.sig.relab, RELAB.SIG.PATH, sep = "\t", row.names = F, quote = F, col.names = T)
+
+```
+
+
+```{r}
+
+```
+
+```{r}
+
+```
